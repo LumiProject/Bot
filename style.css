@@ -533,6 +533,7 @@ h1 { font-size: 64px; font-weight: 700; letter-spacing: -2px; margin-bottom: 20p
 
 .preview-card:hover {
     transform: translateY(-10px);
+    border-color: var(--accent);
 }
 
 .preview-card img {
