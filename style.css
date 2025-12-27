@@ -507,3 +507,42 @@ h1 { font-size: 64px; font-weight: 700; letter-spacing: -2px; margin-bottom: 20p
     .footer-col p { max-width: 100%; }
     .footer-legal { flex-direction: column; gap: 20px; }
 }
+
+.preview-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.preview-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.preview-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+    max-width: 400px;
+}
+
+.preview-card:hover {
+    transform: translateY(-10px);
+}
+
+.preview-card img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.preview-card p {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: bold;
+}
