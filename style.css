@@ -298,3 +298,8 @@ h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 400; opacity: 0.9; margin-b
     .nav-links { display: none; }
     .bento-grid { grid-template-columns: 1fr; }
 }
+.lumi-actions-section, .features-luxury, .premium-section {
+    max-width: 1400px; /* Ancho máximo ideal para monitores grandes */
+    margin: 0 auto;    /* Centra la sección entera */
+    padding: 100px 60px; /* Más espacio arriba/abajo y a los lados */
+}
