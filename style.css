@@ -597,15 +597,102 @@ h1 { font-size: 64px; font-weight: 700; letter-spacing: -2px; margin-bottom: 20p
     padding: 8px;
     text-align: center;
 }
+/* Estilos Generales de la Sección */
+.support-section { padding: 120px 0; background: #08080a; }
 
-.btn-support-featured {
+.category-tag-premium {
+    color: #FFB6C1;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.title-gradient-premium {
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #FFB6C1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 20px 0;
+}
+
+/* Tarjetas Premium con Glow */
+.support-card-lumi {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 182, 193, 0.1);
+    border-radius: 28px;
+    padding: 45px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto HOVER: Brillo Rosa */
+.support-card-lumi:hover {
+    transform: translateY(-15px);
+    border-color: #FFB6C1;
+    box-shadow: 0 0 30px rgba(255, 182, 193, 0.3);
+    background: rgba(255, 182, 193, 0.05);
+}
+
+.level-badge-lumi {
+    color: #FFB6C1;
+    font-size: 12px;
+    font-weight: bold;
     display: block;
+    margin-bottom: 10px;
+}
+
+.price-lumi {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 15px 0;
+}
+
+.price-lumi span { font-size: 1rem; color: rgba(255,255,255,0.5); }
+
+/* Botones con Dinamismo */
+.btn-lumi-premium, .btn-lumi-premium-featured {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+    margin-top: 30px;
+}
+
+.btn-lumi-premium {
+    background: rgba(255, 182, 193, 0.1);
+    color: #FFB6C1;
+    border: 1px solid #FFB6C1;
+}
+
+.btn-lumi-premium:hover {
     background: #FFB6C1;
     color: #000;
+}
+
+.btn-lumi-premium-featured {
+    background: #FFB6C1;
+    color: #000;
+}
+
+.btn-lumi-premium-featured:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(255, 182, 193, 0.4);
+}
+
+.popular-tag-lumi {
+    background: #FFB6C1;
+    color: #000;
+    padding: 10px;
     text-align: center;
-    padding: 15px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 20px;
+    font-weight: 900;
+    font-size: 11px;
+    position: absolute;
+    top: 0; left: 0; right: 0;
 }
