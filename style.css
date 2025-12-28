@@ -132,12 +132,34 @@ h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 400; opacity: 0.9; margin-b
 .lore-quote-box { margin-top: 60px; text-align: center; }
 .lore-quote-box p { font-size: 24px; font-weight: 600; font-style: italic; color: #ff69b4; }
 
+/* =========================================================
+   REGLAS DE CENTRADO GLOBAL (Para todas las secciones)
+   ========================================================= */
+.header-center {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; 
+    text-align: center !important;  
+    margin-bottom: 40px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    gap: 4px !important; /* Mantiene el tag, título y subtítulo pegaditos */
+}
+
+.title-gradient { 
+    font-size: 48px; 
+    background: linear-gradient(to right, #fff, var(--accent)); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    font-weight: 800; 
+    display: inline-block;
+}
+
+.tag-orange { color: #bf4800; font-weight: 700; letter-spacing: 1px; font-size: 12px; }
+
 /* --- PREMIUM SECTION --- */
 .premium-section { padding: 100px 20px; background: #000; text-align: center; }
-.header-center { margin-bottom: 60px; width: 100%; display: flex; flex-direction: column; align-items: center; }
-.tag-orange { color: #bf4800; font-weight: 700; letter-spacing: 1px; font-size: 12px; }
-.title-gradient { font-size: 48px; background: linear-gradient(to right, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
-
 .premium-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -195,9 +217,7 @@ h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 400; opacity: 0.9; margin-b
 .icon-circle { font-size: 40px; margin-bottom: 20px; display: block; }
 .cmd-pill { display: inline-block; background: #1d1d1f; color: var(--accent); padding: 8px 15px; border-radius: 8px; font-family: monospace; margin-top: 15px; }
 
-/* =========================================================
-   SECCIÓN: LUMI EN ACCIÓN - FINAL CORREGIDA
-   ========================================================= */
+/* --- SECCIÓN: LUMI EN ACCIÓN --- */
 .lumi-actions-section {
     padding: 80px 20px !important;
     background: var(--bg) !important;
@@ -205,34 +225,8 @@ h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 400; opacity: 0.9; margin-b
     flex-direction: column !important;
     align-items: center !important; 
     text-align: center !important;
-    width: 100% !important;
 }
 
-.lumi-actions-section .header-center {
-    width: 100% !important;
-    max-width: 800px !important;
-    margin: 0 auto 30px auto !important; 
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 4px !important; /* Pega los textos entre sí */
-}
-
-/* Reset de márgenes internos */
-.lumi-actions-section .tag-orange, 
-.lumi-actions-section .title-gradient, 
-.lumi-actions-section .hero-subtitle {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.lumi-actions-section .hero-subtitle {
-    font-size: 18px !important;
-    color: var(--text-sec) !important;
-    margin-top: 4px !important;
-}
-
-/* Galería pegada al título */
 .action-gallery {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
@@ -260,38 +254,23 @@ h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 400; opacity: 0.9; margin-b
 }
 
 .action-img-container {
-    width: 100% !important;
-    height: 240px !important;
-    background: #111 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 20px !important;
-    border-bottom: 1px solid #222 !important;
+    width: 100% !important; height: 240px !important;
+    background: #111 !important; display: flex !important;
+    align-items: center !important; justify-content: center !important;
+    padding: 20px !important; border-bottom: 1px solid #222 !important;
 }
 
-.action-img {
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important;
-    border-radius: 12px !important;
-}
-
+.action-img { max-width: 100% !important; max-height: 100% !important; object-fit: contain !important; border-radius: 12px !important; }
 .action-info { padding: 30px !important; }
 .action-info h3 { color: #fff !important; font-size: 22px !important; margin-bottom: 12px !important; }
 .action-info p { color: var(--text-sec) !important; font-size: 15px !important; line-height: 1.6 !important; }
 
-/* Botón central final */
 .center-button { margin-top: 50px !important; text-align: center !important; }
 .btn-primary-lumi {
-    display: inline-block;
-    padding: 16px 45px;
-    background: #ffffff;
-    color: #000;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 700;
-    transition: 0.3s;
+    display: inline-block; padding: 16px 45px;
+    background: #ffffff; color: #000;
+    text-decoration: none; border-radius: 50px;
+    font-weight: 700; transition: 0.3s;
 }
 
 /* --- FINAL CTA --- */
@@ -318,21 +297,4 @@ h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 400; opacity: 0.9; margin-b
     .bento-grid, .footer-grid, .nav-links { flex-direction: column; text-align: center; }
     .nav-links { display: none; }
     .bento-grid { grid-template-columns: 1fr; }
-}
-/* Esto centrará los textos de "Interactúa con Lumi" y cualquier otro encabezado */
-.header-center {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important; /* Centra horizontalmente los hijos */
-    text-align: center !important;  /* Centra las líneas de texto */
-    margin-bottom: 60px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/* Aseguramos que el degradado y el subtítulo hereden el centrado */
-.title-gradient, .hero-subtitle {
-    display: inline-block !important; /* Permite que el text-align funcione mejor */
-    width: 100%;
 }
