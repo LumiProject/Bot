@@ -222,3 +222,10 @@ h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 400; opacity: 0.9; margin-b
     .p-card.featured { transform: scale(1); }
     .bento-grid { grid-template-columns: 1fr; }
 }
+/* Añade esto a tu style.css para centrar todo correctamente */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
