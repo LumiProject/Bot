@@ -117,6 +117,25 @@
     .action-card {
         max-width: 100%;
     }
+   /* Ajuste para agrupar varios comandos en una tarjeta */
+.cmd-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.luxury-card .cmd-pill {
+    margin-top: 0; /* Quitamos el margen superior individual para usar el del grupo */
+    font-size: 0.85rem;
+    padding: 6px 12px;
+}
+
+.luxury-card p {
+    margin-bottom: 15px;
+    min-height: 45px; /* Mantiene las tarjetas alineadas si el texto varía */
+}
     
     .action-img-container {
         height: 200px;
