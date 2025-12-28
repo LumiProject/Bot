@@ -316,3 +316,34 @@ h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 400; opacity: 0.9; margin-b
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
 }
+
+/* --- CENTRADO VISTOSO DE "LUMI EN ACCIÓN" --- */
+#lumi-actions .header-center {
+    display: flex; /* Activa el modo flexible */
+    flex-direction: column; /* Alinea los elementos uno debajo del otro */
+    align-items: center; /* Centra horizontalmente todo el contenido */
+    text-align: center; /* Asegura que el texto esté centrado */
+    max-width: 800px; /* Evita que el texto sea demasiado ancho */
+    margin: 0 auto 60px; /* El 'auto' es lo que centra el bloque completo */
+}
+
+#lumi-actions .tag-orange {
+    display: inline-block;
+    padding: 5px 15px;
+    background: rgba(191, 72, 0, 0.1); /* Fondo naranja suave */
+    border-radius: 50px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+#lumi-actions .title-gradient {
+    font-size: clamp(32px, 5vw, 48px); /* Tamaño responsivo para que se vea grande */
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+#lumi-actions .section-subtitle {
+    font-size: 18px;
+    max-width: 600px; /* Para que el párrafo no se vea muy largo y se lea mejor */
+    margin: 0 auto;
+}
