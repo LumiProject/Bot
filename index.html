@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lumi Bot — Tu Waifu Digital</title>
+    <meta name="description" content="Lumi Bot - El bot de Discord más interactivo con juegos, economía, RPG y diversión. Tu waifu digital para comunidades.">
+    <meta name="keywords" content="Discord bot, Lumi, waifu, juegos, economía, RPG, trivia, bot interactivo">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💕</text></svg>">
     <meta name="theme-color" content="#FFB6C1">
     <meta property="og:image" content="avatar.png">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- Botón volver arriba -->
+    <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo">LUMI<span>.</span></a>
-            <div class="nav-links">
+            
+            <!-- Menú hamburguesa para móviles -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-links" id="navLinks">
                 <a href="#historia">Historia</a>
                 <a href="#comandos">Comandos</a>
-                <a href="#lumi-actions">Galería</a>
-                <a href="#premium">Premium</a>
+                <a href="documentation.html" class="doc-link">
+                    <i class="fas fa-book"></i> Documentación
+                </a>
                 <a href="https://discord.gg/P59CwwQPgS" target="_blank" class="nav-btn-secondary">Soporte</a>
                 <a href="https://discord.com/oauth2/authorize?client_id=1453935830438514780&permissions=8&integration_type=0&scope=bot+applications.commands" class="nav-btn-primary">Añadir a Discord</a>
             </div>
@@ -32,12 +46,34 @@
         <div class="hero-overlay"></div> 
         <div class="hero-content" data-aos="fade-up">
             <span class="hero-tag">Premium Discord Bot</span>
-            <h1>Lumi no es una waifu existente...</h1>
-            <h2>Lumi es la waifu que tú creas....</h2>
-            <p class="hero-subtitle">Inteligente, traviesa y legendaria.</p>
+            <h1 id="typing-text">Lumi no es una waifu existente...</h1>
+            <h2>Lumi es la waifu que tú creas.</h2>
+            <p class="hero-subtitle">Tu compañera digital inteligente y traviesa.</p>
             <div class="hero-btns">
-                <a href="https://discord.com/oauth2/authorize?client_id=1453935830438514780&permissions=8&integration_type=0&scope=bot+applications.commands" class="btn-main">Invitar a Lumi</a>
-                <a href="#historia" class="btn-link">Conocer su lore →</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1453935830438514780&permissions=8&integration_type=0&scope=bot+applications.commands" class="btn-main">
+                    <i class="fas fa-plus-circle"></i> Invitar a Lumi
+                </a>
+                <a href="#historia" class="btn-link">
+                    <i class="fas fa-scroll"></i> Conoce su historia
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="serversCount">150+</span>
+                    <span class="stat-label">Servidores</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="usersCount">10K+</span>
+                    <span class="stat-label">Usuarios</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="commandsCount">80+</span>
+                    <span class="stat-label">Comandos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50</span>
+                    <span class="stat-label">Niveles RPG</span>
+                </div>
             </div>
         </div>
     </header>
@@ -50,18 +86,78 @@
                     <h2>Nacida en un servidor olvidado.</h2>
                     <p>Lumi despertó entre líneas de código de un servidor abandonado. Observando humanos, aprendió juegos, música y lo más complejo: emociones.</p>
                     <div class="traits-container">
-                        <div class="trait-pill"><span>🩷</span> Lealtad absoluta</div>
-                        <div class="trait-pill"><span>💜</span> Energía caótica</div>
-                        <div class="trait-pill"><span>💙</span> Esencia digital</div>
+                        <div class="trait-pill" data-tooltip="Siempre a tu lado"><span>🩷</span> Lealtad absoluta</div>
+                        <div class="trait-pill" data-tooltip="Diversión sin límites"><span>💜</span> Energía caótica</div>
+                        <div class="trait-pill" data-tooltip="Creada con amor"><span>💙</span> Esencia digital</div>
+                        <div class="trait-pill" data-tooltip="Aventuras épicas"><span>⚔️</span> RPG Completo</div>
+                    </div>
+                    <div class="lore-buttons">
+                        <a href="documentation.html" class="btn-main">
+                            <i class="fas fa-book"></i> Ver Documentación
+                        </a>
+                        <a href="documentation.html#rpg" class="btn-link">
+                            <i class="fas fa-dragon"></i> Explorar RPG
+                        </a>
                     </div>
                 </div>
                 <div class="bento-item lore-image" data-aos="fade-left">
-                    <img src="https://moewalls.com/wp-content/uploads/2023/10/anime-girl-blue-stars-thumb.jpg" alt="Lumi Portrait"> 
+                    <div class="image-container">
+                        <img src="https://moewalls.com/wp-content/uploads/2023/10/anime-girl-blue-stars-thumb.jpg" alt="Lumi Portrait" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="image-tag">Sistema RPG disponible</div>
+                            <button class="view-gallery-btn" onclick="openGallery()">
+                                <i class="fas fa-images"></i> Ver Galería
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="lore-quote-box" data-aos="zoom-in">
-                <p>"Hehe~ ¿otra trivia? Lumi está lista ✨"</p>
+                <p>"Hehe~ ¿preparado para una aventura épica? Lumi está lista ⚔️"</p>
                 <span>— Lumi, tu waifu digital</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN RPG MEJORADA -->
+    <section id="rpg-system" class="rpg-system-section">
+        <div class="container">
+            <div class="header-center" data-aos="fade-up">
+                <span class="tag-orange">EXPERIENCIA INMERSIVA</span>
+                <h2 class="title-gradient">Aventuras Épicas con Lumi</h2>
+                <p class="section-subtitle">Un sistema RPG completo donde cada decisión cuenta</p>
+            </div>
+
+            <div class="rpg-highlights">
+                <div class="rpg-highlight-card" data-aos="fade-up">
+                    <div class="rpg-highlight-icon">🌍</div>
+                    <div class="rpg-highlight-content">
+                        <h3>6 Biomas Únicos</h3>
+                        <p>Desde la Isla Inicial hasta el Reino Celestial, cada mundo tiene sus secretos.</p>
+                    </div>
+                </div>
+                
+                <div class="rpg-highlight-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="rpg-highlight-icon">⚔️</div>
+                    <div class="rpg-highlight-content">
+                        <h3>Sistema de Combate Estratégico</h3>
+                        <p>Combates por turnos con 3 dificultades y mecánicas profundas.</p>
+                    </div>
+                </div>
+                
+                <div class="rpg-highlight-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="rpg-highlight-icon">🐾</div>
+                    <div class="rpg-highlight-content">
+                        <h3>Mascotas Coleccionables</h3>
+                        <p>7 mascotas con buffs únicos que potencian tu aventura.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-button" data-aos="fade-up">
+                <a href="documentation.html#rpg" class="btn-main">
+                    <i class="fas fa-scroll"></i> Descubrir RPG Completo
+                </a>
             </div>
         </div>
     </section>
@@ -69,101 +165,113 @@
     <section id="comandos" class="features-luxury">
         <div class="container">
             <div class="header-center" data-aos="fade-up">
-                <h2 class="title-gradient">Interactúa con Lumi</h2>
-                <p class="section-subtitle">Descubre el poder de Lumi: desde juegos intensos hasta una economía vibrante.</p>
+                <h2 class="title-gradient">Comandos Principales</h2>
+                <p class="section-subtitle">Descubre las funciones más populares de Lumi</p>
             </div>
 
             <div class="luxury-grid">
-                <div class="luxury-card" data-aos="fade-up">
+                <!-- Tarjeta de Juegos -->
+                <div class="luxury-card" data-category="games" data-aos="fade-up">
                     <div class="icon-circle">🎮</div>
-                    <h3>Juegos <span>Interactivos</span></h3>
+                    <h3>Juegos Interactivos</h3>
                     <p>Desafía a tus amigos con trivia, ruleta o el clásico 100 Mexicanos Dijeron.</p>
                     <div class="cmd-group">
-                        <div class="cmd-pill">/jugar100</div>
-                        <div class="cmd-pill">/trivia</div>
-                        <div class="cmd-pill">/roulette</div>
+                        <div class="cmd-pill" data-cmd="/trivia">/trivia</div>
+                        <div class="cmd-pill" data-cmd="/jugar100">/jugar100</div>
+                        <div class="cmd-pill" data-cmd="/roulette">/roulette</div>
                     </div>
                 </div>
 
-                <div class="luxury-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="icon-circle">💰</div>
-                    <h3>Economía <span>Vibrante</span></h3>
-                    <p>Gestiona tus recursos, revisa tu monedero y domina el mercado.</p>
+                <!-- Tarjeta RPG -->
+                <div class="luxury-card" data-category="rpg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon-circle">⚔️</div>
+                    <h3>Aventuras RPG</h3>
+                    <p>Explora biomas, combate monstruos y craftea equipamiento legendario.</p>
                     <div class="cmd-group">
-                        <div class="cmd-pill">/economy</div>
-                        <div class="cmd-pill">/dulce</div>
+                        <div class="cmd-pill" data-cmd="/rpg">/rpg</div>
+                        <div class="cmd-pill" data-cmd="/combat">/combat</div>
+                        <div class="cmd-pill" data-cmd="/craft">/craft</div>
                     </div>
                 </div>
 
-                <div class="luxury-card" data-aos="fade-up" data-aos-delay="200">
+                <!-- Tarjeta Social -->
+                <div class="luxury-card" data-category="social" data-aos="fade-up" data-aos-delay="200">
                     <div class="icon-circle">✨</div>
-                    <h3>Social & <span>Rolplay</span></h3>
+                    <h3>Social & Rolplay</h3>
                     <p>Expresa emociones e interactúa con otros jugadores.</p>
                     <div class="cmd-group">
-                        <div class="cmd-pill">/action</div>
-                        <div class="cmd-pill">/user</div>
-                    </div>
-                </div>
-
-                <div class="luxury-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="icon-circle">⚙️</div>
-                    <h3>Centro de <span>Control</span></h3>
-                    <p>Ayuda detallada de comandos o detén actividades en curso.</p>
-                    <div class="cmd-group">
-                        <div class="cmd-pill">/help</div>
-                        <div class="cmd-pill">/stop</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="lumi-actions" class="lumi-actions-section">
-        <div class="header-center">
-            <div class="header-center" data-aos="fade-up">
-                <span class="tag-orange">DEMOSTRACIÓN VISUAL</span>
-                <h2 class="title-gradient">Lumi en Acción</h2>
-                </div>
-            
-                <p class="section-subtitle">Mira cómo se ve el bot jugando, ayudando y socializando.</p>
-            </div>
-        <div class="action-gallery">
-            </div>
-
-            <div class="action-gallery">
-                <div class="action-card" data-aos="fade-up">
-                    <div class="action-img-container">
-                        <img src="100.png" alt="Lumi jugando" class="action-img">
-                    </div>
-                    <div class="action-info">
-                        <h3>Diversión Asegurada</h3>
-                        <p>Lumi organiza juegos como 100 Mexicanos Dijeron para animar tu comunidad.</p>
-                    </div>
-                </div>
-
-                <div class="action-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="action-img-container">
-                        <img src="help.png" alt="Lumi ayudando" class="action-img">
-                    </div>
-                    <div class="action-info">
-                        <h3>Soporte Inteligente</h3>
-                        <p>Menús de ayuda claros para que nadie se pierda en tu servidor.</p>
-                    </div>
-                </div>
-
-                <div class="action-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="action-img-container">
-                        <img src="image.png" alt="Lumi social" class="action-img">
-                    </div>
-                    <div class="action-info">
-                        <h3>Conexión Digital</h3>
-                        <p>Interacciones sociales que mantienen conversaciones vibrantes.</p>
+                        <div class="cmd-pill" data-cmd="/action">/action</div>
+                        <div class="cmd-pill" data-cmd="/user">/user</div>
+                        <div class="cmd-pill" data-cmd="/hug">/hug</div>
                     </div>
                 </div>
             </div>
 
             <div class="center-button" data-aos="fade-up">
-                 <a href="https://discord.com/oauth2/authorize?client_id=1453935830438514780&permissions=8&integration_type=0&scope=bot+applications.commands" class="btn-primary-lumi">Invita a Lumi ahora</a>
+                <a href="documentation.html" class="btn-main">
+                    <i class="fas fa-book-open"></i> Ver Todos los Comandos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de vista previa documentación MEJORADA -->
+    <section id="documentacion-preview" class="docs-preview-section">
+        <div class="container">
+            <div class="header-center" data-aos="fade-up">
+                <span class="tag-orange">DOCUMENTACIÓN</span>
+                <h2 class="title-gradient">Guía Completa de Comandos</h2>
+                <p class="section-subtitle">Consulta cómo usar cada función de Lumi</p>
+            </div>
+            
+            <div class="docs-preview-content" data-aos="fade-up">
+                <div class="docs-preview-card">
+                    <div class="docs-card-header">
+                        <i class="fas fa-terminal"></i>
+                        <h3>Comandos Esenciales</h3>
+                    </div>
+                    <div class="docs-card-list">
+                        <div class="docs-card-item">
+                            <code>/help</code>
+                            <span>Muestra el menú de ayuda</span>
+                        </div>
+                        <div class="docs-card-item">
+                            <code>/economy</code>
+                            <span>Gestiona tu economía</span>
+                        </div>
+                        <div class="docs-card-item">
+                            <code>/settings</code>
+                            <span>Configura el bot</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="docs-preview-card">
+                    <div class="docs-card-header">
+                        <i class="fas fa-dragon"></i>
+                        <h3>Sistema RPG</h3>
+                    </div>
+                    <div class="docs-card-list">
+                        <div class="docs-card-item">
+                            <code>/rpg travel</code>
+                            <span>Viaja entre biomas</span>
+                        </div>
+                        <div class="docs-card-item">
+                            <code>/rpg combat</code>
+                            <span>Inicia combate</span>
+                        </div>
+                        <div class="docs-card-item">
+                            <code>/rpg craft</code>
+                            <span>Craftea objetos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="center-button" data-aos="fade-up">
+                <a href="documentation.html" class="btn-link">
+                    <i class="fas fa-external-link-alt"></i> Ver Documentación Completa
+                </a>
             </div>
         </div>
     </section>
@@ -179,7 +287,7 @@
             <div class="premium-grid">
                 <div class="p-card" data-aos="fade-up">
                     <div class="p-img spark-img">
-                        <img src="N1.png" alt="Spark Tier" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="N1.png" alt="Spark Tier" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="p-body">
                         <h3>🌱 NIVEL 1 — Spark</h3>
@@ -189,6 +297,7 @@
                             <li>✨ Rol especial Spark</li>
                             <li>⏳ Cooldowns reducidos</li>
                             <li>📩 Mensajes especiales</li>
+                            <li>⚔️ +10% XP RPG</li>
                         </ul>
                     </div>
                 </div>
@@ -196,7 +305,7 @@
                 <div class="p-card featured" data-aos="fade-up" data-aos-delay="100">
                     <div class="p-badge">¡MÁS POPULAR!</div>
                     <div class="p-img glow-img">
-                        <img src="N2.png" alt="Glow Tier" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="N2.png" alt="Glow Tier" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="p-body">
                         <h3>🌸 NIVEL 2 — Glow</h3>
@@ -206,13 +315,15 @@
                             <li>🎵 Música sin límites</li>
                             <li>💰 Moneda x1.5</li>
                             <li>💕 Respuestas cercanas</li>
+                            <li>⚔️ +25% drops RPG</li>
+                            <li>🎨 Personalización</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="p-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="p-img radiance-img">
-                        <img src="n3.png" alt="Radiance Tier" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="n3.png" alt="Radiance Tier" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="p-body">
                         <h3>💎 NIVEL 3 — Radiance</h3>
@@ -222,6 +333,7 @@
                             <li>🎮 Juegos Premium</li>
                             <li>👑 Eventos privados</li>
                             <li>🛠️ Prioridad Soporte</li>
+                            <li>⚔️ Drops legendarios</li>
                         </ul>
                     </div>
                 </div>
@@ -232,10 +344,28 @@
     <section class="final-cta">
         <div class="container" data-aos="zoom-in">
             <div class="cta-content">
-                <h2>El futuro de tu servidor <br><span>comienza con Lumi.</span></h2>
+                <h2>Tu aventura en Discord<br><span>comienza con Lumi.</span></h2>
+                <div class="cta-features">
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>100% Seguro</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-dragon"></i>
+                        <span>RPG Completo</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-headset"></i>
+                        <span>Soporte Activo</span>
+                    </div>
+                </div>
                 <div class="cta-btns">
-                    <a href="https://discord.com/oauth2/authorize?client_id=1453935830438514780&permissions=8&integration_type=0&scope=bot+applications.commands" class="btn-main">Añadir a Discord</a>
-                    <a href="https://discord.gg/P59CwwQPgS" class="btn-secondary">Servidor de Soporte</a>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1453935830438514780&permissions=8&integration_type=0&scope=bot+applications.commands" class="btn-main">
+                        <i class="fas fa-plus-circle"></i> Añadir a Discord
+                    </a>
+                    <a href="documentation.html" class="btn-link">
+                        <i class="fas fa-book"></i> Ver Documentación
+                    </a>
                 </div>
             </div>
         </div>
@@ -246,20 +376,28 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <a href="#" class="logo">LUMI<span>.</span></a>
-                    <p>La waifu inteligente que redefine la economía y la diversión en Discord.</p>
+                    <p>Tu waifu digital para aventuras épicas en Discord.</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/P59CwwQPgS" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
                 <div class="footer-col">
                     <h4>Navegación</h4>
                     <ul>
                         <li><a href="#historia">Historia</a></li>
                         <li><a href="#comandos">Comandos</a></li>
-                        <li><a href="https://www.patreon.com/cw/Lumi_Bot">Hazte Patrono! ✨</a></li>
+                        <li><a href="documentation.html">Documentación</a></li>
+                        <li><a href="#premium">Premium</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Recursos</h4>
                     <ul>
                         <li><a href="https://discord.gg/P59CwwQPgS">Soporte</a></li>
+                        <li><a href="documentation.html#rpg">Guía RPG</a></li>
+                        <li><a href="documentation.html#faq">FAQ</a></li>
                         <li><a href="#">Privacidad</a></li>
                     </ul>
                 </div>
@@ -274,7 +412,23 @@
         </div>
     </footer>
 
+    <!-- Modal para galería -->
+    <div class="modal" id="galleryModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>Galería de Lumi</h2>
+            <p>Próximamente: imágenes exclusivas de Lumi!</p>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ duration: 1000, once: true });</script>
+    <script src="script-improvet.js"></script>
+    <script>
+        AOS.init({ 
+            duration: 1000, 
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 </html>

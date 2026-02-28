@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMI - Documentación RPG</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="docs-style.css">
+    
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-theme="dark">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="doc-logo">
+                <i class="fas fa-robot"></i>
+                LUMI<span>DOCS</span>
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+                <a href="#comandos"><i class="fas fa-terminal"></i> Comandos</a>
+                <a href="documentacion.html" class="active"><i class="fas fa-file-alt"></i> Documentación</a>
+                <a href="#rpg-section"><i class="fas fa-gamepad"></i> RPG</a>
+                <a href="#items-database"><i class="fas fa-database"></i> Items</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER HERO -->
+    <header class="docs-header">
+        <div class="docs-hero">
+            <!-- Breadcrumb -->
+            <nav class="docs-breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+                <span><i class="fas fa-chevron-right"></i></span>
+                <a href="documentacion.html"><i class="fas fa-folder"></i> Documentación</a>
+                <span><i class="fas fa-chevron-right"></i></span>
+                <span><i class="fas fa-gamepad"></i> Sistema RPG</span>
+            </nav>
+            
+            <!-- Título principal -->
+            <h1>Sistema RPG Completo</h1>
+            <p class="docs-subtitle">Explora, combate, crea y colecciona en una aventura épica</p>
+            
+            <!-- Barra de búsqueda -->
+            <div class="docs-search">
+                <input type="text" placeholder="Buscar comandos, guías, ayuda..." id="searchInput">
+                <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <!-- Estadísticas -->
+            <div class="docs-stats">
+                <div class="stat">
+                    <span class="number">150+</span>
+                    <span class="label">Comandos</span>
+                </div>
+                <div class="stat">
+                    <span class="number">6</span>
+                    <span class="label">Biomas</span>
+                </div>
+                <div class="stat">
+                    <span class="number">92</span>
+                    <span class="label">Objetos</span>
+                </div>
+                <div class="stat">
+                    <span class="number">24/7</span>
+                    <span class="label">Soporte</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="docs-container">
+        <!-- BARRA LATERAL -->
+        <aside class="docs-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-folder"></i> Categorías</h3>
+                <ul class="category-list">
+                    <li><a href="#rpg-section" class="active"><i class="fas fa-gamepad"></i> Sistema RPG</a></li>
+                    <li><a href="#items-database"><i class="fas fa-database"></i> Base de Items</a></li>
+                    <li><a href="#economy"><i class="fas fa-coins"></i> Economía</a></li>
+                    <li><a href="#games"><i class="fas fa-dice"></i> Juegos</a></li>
+                    <li><a href="#utilities"><i class="fas fa-tools"></i> Utilidades</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-fire"></i> Acceso Rápido</h3>
+                <a href="#biomes" class="quick-link"><i class="fas fa-globe-americas"></i> Biomas</a>
+                <a href="#combat-section" class="quick-link"><i class="fas fa-fist-raised"></i> Combate</a>
+                <a href="#mining" class="quick-link"><i class="fas fa-hammer"></i> Minería</a>
+                <a href="#crafting" class="quick-link"><i class="fas fa-tools"></i> Crafteo</a>
+                <a href="#consumibles" class="quick-link"><i class="fas fa-utensils"></i> Consumibles</a>
+                <a href="#materiales" class="quick-link"><i class="fas fa-gem"></i> Materiales</a>
+                <a href="#equipamiento" class="quick-link"><i class="fas fa-shield-alt"></i> Equipamiento</a>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-link"></i> Enlaces Útiles</h3>
+                <a href="#faq" class="quick-link"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a>
+                <a href="https://discord.gg/P59CwwQPgS" target="_blank" class="quick-link"><i class="fab fa-discord"></i> Servidor de Soporte</a>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO DE DOCUMENTACIÓN -->
+        <div class="docs-content">
+            <!-- ==================== SECCIÓN RPG PRINCIPAL ==================== -->
+            <section id="rpg-section" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-gamepad section-icon"></i> Sistema RPG</h2>
+                    <p class="section-desc">Menú principal del sistema de aventuras. Desde aquí accedes a todas las funciones RPG.</p>
+                </div>
+                
+                <!-- COMANDO PRINCIPAL -->
+                <div class="command-card">
+                    <div class="command-header">
+                        <h3>/rpg</h3>
+                        <span class="command-category">RPG</span>
+                        <span class="premium-badge">PREMIUM</span>
+                    </div>
+                    
+                    <p class="command-desc">Sistema principal de aventuras RPG. Explora, combate, mina y crea objetos en un mundo épico.</p>
+                    
+                    <div class="command-usage">
+                        <h4><i class="fas fa-terminal"></i> Uso</h4>
+                        <code class="copy-code">/rpg</code>
+                    </div>
+                    
+                    <div class="command-params">
+                        <h4><i class="fas fa-code-branch"></i> Subcomandos Principales</h4>
+                        <div class="rpg-subcommands">
+                            <strong>• /rpg travel [bioma]</strong> - Viajar entre biomas<br>
+                            <strong>• /rpg combat [enemigo]</strong> - Iniciar combate<br>
+                            <strong>• /rpg mine</strong> - Minar recursos<br>
+                            <strong>• /rpg craft [objeto]</strong> - Crear objetos<br>
+                            <strong>• /economy</strong> - Sistema económico
+                        </div>
+                    </div>
+                    
+                    <div class="command-example">
+                        <h4><i class="fas fa-code"></i> Ejemplo</h4>
+                        <code class="copy-code">/rpg travel bosque</code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SUBCOMANDOS DETALLADOS ==================== -->
+            <section id="subcommands" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-list section-icon"></i> Subcomandos del Sistema</h2>
+                </div>
+                
+                <div class="command-grid">
+                    <!-- TRAVEL -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3>/rpg travel</h3>
+                            <span class="command-category">Viaje</span>
+                        </div>
+                        <p class="command-desc">Viaja entre diferentes biomas para explorar y encontrar recursos únicos.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/rpg travel [bioma]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-map-marked-alt"></i> Biomas disponibles</h4>
+                            <ul class="rpg-list">
+                                <li>🏝️ Isla Inicial - Recursos básicos</li>
+                                <li>🌲 Bosque - Madera y cristales verdes</li>
+                                <li>🏜️ Desierto - Recursos exóticos</li>
+                                <li>🌋 Volcán - Materiales legendarios</li>
+                                <li>❄️ Reino Glacial - Cristales de hielo</li>
+                                <li>☁️ Reino Celestial - Materiales divinos</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- COMBAT -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3>/rpg combat</h3>
+                            <span class="command-category">Combate</span>
+                        </div>
+                        <p class="command-desc">Inicia un combate contra enemigos. Gana experiencia, oro y objetos raros.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/rpg combat [enemigo]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-skull-crossbones"></i> Enemigos por nivel</h4>
+                            <ul class="rpg-list">
+                                <li>🧟 Zombie - Nivel 1-5</li>
+                                <li>🧙‍♂️ Mago - Nivel 6-10</li>
+                                <li>🐉 Dragón - Nivel 11-15</li>
+                                <li>👑 Rey Demonio - Nivel 16+</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- MINE -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3>/rpg mine</h3>
+                            <span class="command-category">Minería</span>
+                        </div>
+                        <p class="command-desc">Extrae recursos valiosos de las minas. Encuentra minerales raros y gemas.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/rpg mine</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-info-circle"></i> Nota</h4>
+                            <p style="color: var(--text-secondary); margin: 0;">Requiere un pico equipado. Mejores picos = mejores recursos.</p>
+                        </div>
+                    </div>
+
+                    <!-- CRAFT -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3>/rpg craft</h3>
+                            <span class="command-category">Crafteo</span>
+                        </div>
+                        <p class="command-desc">Crea objetos, armas y herramientas usando los materiales que has recolectado.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/rpg craft [objeto]</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== BASE DE DATOS DE ITEMS ==================== -->
+            <section id="items-database" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-database section-icon"></i> Base de Datos de Items</h2>
+                    <p class="section-desc">Todos los objetos del RPG Lumi organizados por categoría, rareza y bioma.</p>
+                </div>
+
+                <!-- FILTROS -->
+                <div class="items-filters">
+                    <div class="filter-group">
+                        <label><i class="fas fa-filter"></i> Filtro Rápido:</label>
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" data-filter="all">Todos</button>
+                            <button class="filter-tab" data-filter="consumible">Consumibles</button>
+                            <button class="filter-tab" data-filter="material">Materiales</button>
+                            <button class="filter-tab" data-filter="equipo">Equipamiento</button>
+                            <button class="filter-tab" data-filter="especial">Especiales</button>
+                        </div>
+                    </div>
+
+                    <div class="filters-row">
+                        <div class="filter-group">
+                            <label><i class="fas fa-gem"></i> Rareza:</label>
+                            <div class="rarity-filters">
+                                <button class="rarity-btn active" data-rarity="all">Todas</button>
+                                <button class="rarity-btn comun" data-rarity="COMUN">Común</button>
+                                <button class="rarity-btn raro" data-rarity="RARO">Raro</button>
+                                <button class="rarity-btn epico" data-rarity="EPICO">Épico</button>
+                                <button class="rarity-btn legendario" data-rarity="LEGENDARIO">Legendario</button>
+                                <button class="rarity-btn divino" data-rarity="DIVINO">Divino</button>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Bioma:</label>
+                            <div class="bioma-filters">
+                                <button class="bioma-btn active" data-bioma="all">Todos</button>
+                                <button class="bioma-btn" data-bioma="isla">Isla</button>
+                                <button class="bioma-btn" data-bioma="bosque">Bosque</button>
+                                <button class="bioma-btn" data-bioma="desierto">Desierto</button>
+                                <button class="bioma-btn" data-bioma="volcan">Volcán</button>
+                                <button class="bioma-btn" data-bioma="glacial">Glacial</button>
+                                <button class="bioma-btn" data-bioma="celestial">Celestial</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Búsqueda -->
+                    <div class="search-box">
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="itemSearch" placeholder="Buscar por nombre o descripción...">
+                            <button class="clear-btn" id="clearSearch"><i class="fas fa-times"></i></button>
+                        </div>
+                        <p class="search-tips">💡 Tip: Busca por nombre, tipo de material, o efecto del item</p>
+                    </div>
+                </div>
+
+                <!-- CONTADORES -->
+                <div class="counters">
+                    <div class="counter">Total de items: <strong id="totalItems">0</strong></div>
+                    <div class="counter">Mostrando: <strong id="showingItems">0</strong></div>
+                    <div class="counter">Filtrados: <strong id="filteredItems">0</strong></div>
+                </div>
+
+                <!-- TABLA DE ITEMS -->
+                <div class="items-table-container">
+                    <table class="items-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="name">
+                                    Item <i class="fas fa-sort"></i>
+                                </th>
+                                <th class="sortable" data-sort="category">
+                                    Categoría <i class="fas fa-sort"></i>
+                                </th>
+                                <th class="sortable" data-sort="rarity">
+                                    Rareza <i class="fas fa-sort"></i>
+                                </th>
+                                <th class="sortable" data-sort="bioma">
+                                    Bioma <i class="fas fa-sort"></i>
+                                </th>
+                                <th class="sortable" data-sort="value">
+                                    Valor <i class="fas fa-sort"></i>
+                                </th>
+                                <th>Stats</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsTableBody">
+                            <!-- Los items se cargan dinámicamente -->
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 10px;"></i><br>
+                                    Cargando items...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PAGINACIÓN -->
+                <div class="pagination">
+                    <button class="page-btn" id="prevPage">
+                        <i class="fas fa-chevron-left"></i> Anterior
+                    </button>
+                    <div class="page-info">
+                        Página <span id="currentPage">1</span> de <span id="totalPages">1</span>
+                    </div>
+                    <button class="page-btn" id="nextPage">
+                        Siguiente <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ==================== FAQ ==================== -->
+            <section id="faq" class="docs-section faq-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-question-circle section-icon"></i> Preguntas Frecuentes</h2>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>¿Cómo empiezo a jugar al RPG?</h3>
+                        <p>Usa el comando <code class="copy-code">/rpg</code> para acceder al menú principal y luego <code class="copy-code">/rpg travel</code> para comenzar tu aventura en el bioma que elijas.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>¿Necesito Premium para el RPG?</h3>
+                        <p>No, el sistema RPG básico es gratuito. Premium ofrece ventajas como recompensas dobles, acceso exclusivo a biomas y mascotas legendarias.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>¿Cómo obtengo mejores objetos?</h3>
+                        <p>Combatiendo enemigos más fuertes, minando en biomas avanzados o creando objetos con <code class="copy-code">/rpg craft</code>.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>¿Puedo jugar con amigos?</h3>
+                        <p>¡Sí! Puedes formar grupos para combates más difíciles o explorar juntos los biomas.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>¿Qué son los Nekos?</h3>
+                        <p>Los Nekos son la moneda del juego. Los obtienes al combatir, minar, pescar y vender items. Úsalos para comprar en la tienda o craftear objetos.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>¿Cómo recupero stamina (⚡)?</h3>
+                        <p>Usa el comando <code class="copy-code">/comer [item]</code> con cualquier consumible. La stamina también se regenera con el tiempo.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- MODAL DE DETALLE DE ITEM -->
+    <div id="itemDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="detailName">Item</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-grid">
+                    <div class="detail-left">
+                        <div class="detail-emoji" id="detailEmoji">📦</div>
+                        <span class="detail-rarity" id="detailRarity">COMÚN</span>
+                    </div>
+                    <div class="detail-right">
+                        <div class="detail-section">
+                            <h4><i class="fas fa-info-circle"></i> Descripción</h4>
+                            <p id="detailDesc">Descripción del item...</p>
+                        </div>
+                        <div class="detail-section">
+                            <h4><i class="fas fa-map-marker-alt"></i> Ubicación</h4>
+                            <p id="detailLocation">Donde encontrar este item...</p>
+                        </div>
+                        <div class="detail-section">
+                            <h4><i class="fas fa-chart-bar"></i> Estadísticas</h4>
+                            <div class="detail-stats" id="detailStats">
+                                <!-- Stats dinámicos -->
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <h4><i class="fas fa-coins"></i> Valor de Venta</h4>
+                            <div class="detail-value" id="detailValue">0 Nekos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-apple">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>LUMI DOCS</h4>
+                    <p>Documentación completa del bot LUMI. Todos los comandos, guías y tutoriales en un solo lugar.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="documentacion.html">Documentación</a></li>
+                        <li><a href="#rpg-section">Sistema RPG</a></li>
+                        <li><a href="#items-database">Base de Items</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Servidor de Discord</a></li>
+                        <li><a href="#">Reportar Bug</a></li>
+                        <li><a href="#">Solicitar Característica</a></li>
+                        <li><a href="#">Estado del Servicio</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-legal">
+                <div class="legal-left">
+                    &copy; 2024 LUMI Bot. Todos los derechos reservados.
+                </div>
+                <div class="legal-right">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Uso</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón de cambio de tema -->
+    <div class="theme-toggle">
+        <button id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Botón Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="items-database.js"></script>
+    <script src="docs-script.js"></script>
+</body>
+</html>
