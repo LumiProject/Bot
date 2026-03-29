@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMI - Documentación de Comandos</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="docs-style.css">
+    
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-theme="dark">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="doc-logo">
+                <i class="fas fa-robot"></i>
+                LUMI<span>DOCS</span>
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+                <a href="#comandos"><i class="fas fa-terminal"></i> Comandos</a>
+                <a href="documentacion.html" class="active"><i class="fas fa-file-alt"></i> Documentación</a>
+                <a href="#rpg-section"><i class="fas fa-gamepad"></i> RPG</a>
+                <a href="#items-database"><i class="fas fa-database"></i> Items</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER HERO -->
+    <header class="docs-header">
+        <div class="docs-hero">
+            <!-- Breadcrumb -->
+            <nav class="docs-breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+                <span><i class="fas fa-chevron-right"></i></span>
+                <a href="documentacion.html"><i class="fas fa-folder"></i> Documentación</a>
+                <span><i class="fas fa-chevron-right"></i></span>
+                <span><i class="fas fa-terminal"></i> Comandos LUMI</span>
+            </nav>
+            
+            <!-- Título principal -->
+            <h1>Comandos de LUMI</h1>
+            <p class="docs-subtitle">Todos los comandos disponibles, descripciones y ejemplos de uso</p>
+            
+            <!-- Barra de búsqueda -->
+            <div class="docs-search">
+                <input type="text" placeholder="Buscar comandos, descripciones, categorías..." id="searchInput">
+                <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <!-- Estadísticas -->
+            <div class="docs-stats">
+                <div class="stat">
+                    <span class="number">18</span>
+                    <span class="label">Comandos</span>
+                </div>
+                <div class="stat">
+                    <span class="number">6</span>
+                    <span class="label">Categorías</span>
+                </div>
+                <div class="stat">
+                    <span class="number">24/7</span>
+                    <span class="label">Activo</span>
+                </div>
+                <div class="stat">
+                    <span class="number">100+</span>
+                    <span class="label">Items</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="docs-container">
+        <!-- BARRA LATERAL -->
+        <aside class="docs-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-folder"></i> Categorías</h3>
+                <ul class="category-list">
+                    <li><a href="#social-section" class="active"><i class="fas fa-heart"></i> Social</a></li>
+                    <li><a href="#games-section"><i class="fas fa-dice-d20"></i> Juegos</a></li>
+                    <li><a href="#economy-section"><i class="fas fa-coins"></i> Economía</a></li>
+                    <li><a href="#rpg-section"><i class="fas fa-gamepad"></i> RPG / Rolplay</a></li>
+                    <li><a href="#music-section"><i class="fas fa-music"></i> Música</a></li>
+                    <li><a href="#utilities-section"><i class="fas fa-tools"></i> Utilidades</a></li>
+                    <li><a href="#mod-section"><i class="fas fa-shield-hammer"></i> Moderación</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-bolt"></i> Acceso Rápido</h3>
+                <a href="#action" class="quick-link"><i class="fas fa-hands-helping"></i> /action</a>
+                <a href="#casino" class="quick-link"><i class="fas fa-dice"></i> /casino</a>
+                <a href="#economy" class="quick-link"><i class="fas fa-coins"></i> /economy</a>
+                <a href="#rolplay" class="quick-link"><i class="fas fa-dragon"></i> /rolplay</a>
+                <a href="#play" class="quick-link"><i class="fas fa-play"></i> /play</a>
+                <a href="#pets" class="quick-link"><i class="fas fa-cat"></i> /pets</a>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-link"></i> Enlaces Útiles</h3>
+                <a href="#faq" class="quick-link"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a>
+                <a href="https://discord.gg/P59CwwQPgS" target="_blank" class="quick-link"><i class="fab fa-discord"></i> Servidor de Soporte</a>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO DE DOCUMENTACIÓN -->
+        <div class="docs-content">
+            <!-- ==================== SECCIÓN SOCIAL ==================== -->
+            <section id="social-section" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-heart section-icon"></i> Comandos Sociales</h2>
+                    <p class="section-desc">Interactúa con otros usuarios y expresa tus emociones.</p>
+                </div>
+                
+                <div class="command-grid">
+                    <!-- ACTION -->
+                    <div class="command-card" id="action">
+                        <div class="command-header">
+                            <h3><i class="fas fa-hands-helping"></i> /action</h3>
+                            <span class="command-category">Social</span>
+                        </div>
+                        <p class="command-desc">Realiza acciones interactivas con otros usuarios. Abraza, besa, pega, acaricia, golpea, muerde o patea a otros miembros.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/action [acción] [usuario]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-list"></i> Acciones disponibles</h4>
+                            <div class="tags-list">
+                                <span class="tag">abrazar</span>
+                                <span class="tag">besar</span>
+                                <span class="tag">pegar</span>
+                                <span class="tag">acariciar</span>
+                                <span class="tag">golpear</span>
+                                <span class="tag">morder</span>
+                                <span class="tag">patear</span>
+                            </div>
+                        </div>
+                        
+                        <div class="command-example">
+                            <h4><i class="fas fa-code"></i> Ejemplo</h4>
+                            <code class="copy-code">/action abrazar @usuario</code>
+                        </div>
+                    </div>
+
+                    <!-- DULCE -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-candy-cane"></i> /dulce</h3>
+                            <span class="command-category">Social</span>
+                        </div>
+                        <p class="command-desc">Sistema de romance/amistad que se activa al hablar por chat. Acumula dulzura al interactuar con otros usuarios.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/dulce</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-chart-line"></i> Características</h4>
+                            <ul class="feature-list">
+                                <li>💕 Contador de "dulzura" acumulada</li>
+                                <li>🎲 Eventos aleatorios al chatear</li>
+                                <li>🤝 Niveles de amistad entre usuarios</li>
+                                <li>🏆 Recompensas por alcanzar nuevos niveles</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECCIÓN JUEGOS ==================== -->
+            <section id="games-section" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-dice-d20 section-icon"></i> Comandos de Juegos</h2>
+                    <p class="section-desc">Diversión asegurada con estos juegos interactivos.</p>
+                </div>
+                
+                <div class="command-grid">
+                    <!-- CASINO -->
+                    <div class="command-card" id="casino">
+                        <div class="command-header">
+                            <h3><i class="fas fa-dice"></i> /casino</h3>
+                            <span class="command-category">Juegos</span>
+                        </div>
+                        <p class="command-desc">Juegos de azar con la economía del bot. Apuesta tus Nekos y gana grandes premios.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/casino [juego] [apuesta]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-gamepad"></i> Juegos disponibles</h4>
+                            <ul class="games-list">
+                                <li><strong>🎴 Blackjack</strong> - Llega a 21 sin pasarte</li>
+                                <li><strong>🐓 Pelea de Gallos</strong> - Apuesta en peleas épicas</li>
+                                <li><strong>🎡 Ruleta</strong> - Elige color o número</li>
+                                <li><strong>🎰 Tragamonedas</strong> - Gira y consigue combinaciones</li>
+                                <li><strong>🎲 Dados</strong> - Apuesta al resultado</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- JUGAR100 -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-users"></i> /jugar100</h3>
+                            <span class="command-category">Juegos</span>
+                        </div>
+                        <p class="command-desc">"100 Mexicanos Dijeron" - Adivina las respuestas más populares a las preguntas.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/jugar100</code>
+                        </div>
+                    </div>
+
+                    <!-- TRIVIA -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-question-circle"></i> /trivia</h3>
+                            <span class="command-category">Juegos</span>
+                        </div>
+                        <p class="command-desc">Pon a prueba tus conocimientos con preguntas de cultura general, música, historia y más.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/trivia [categoría]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-tags"></i> Categorías</h4>
+                            <div class="tags-list">
+                                <span class="tag">General</span>
+                                <span class="tag">Música</span>
+                                <span class="tag">Historia</span>
+                                <span class="tag">Ciencia</span>
+                                <span class="tag">Entretenimiento</span>
+                                <span class="tag">Deportes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROULETTE -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-gun"></i> /roulette</h3>
+                            <span class="command-category">Juegos</span>
+                        </div>
+                        <p class="command-desc">Buckshot Roulette - Ruleta rusa con escopeta. Apuesta y sobrevive.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/roulette [apuesta]</code>
+                        </div>
+                    </div>
+
+                    <!-- STOP -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-stop"></i> /stop</h3>
+                            <span class="command-category">Juegos</span>
+                        </div>
+                        <p class="command-desc">Detiene juegos en pausa o cancela partidas activas.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/stop [juego]</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECCIÓN ECONOMÍA ==================== -->
+            <section id="economy-section" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-coins section-icon"></i> Comandos de Economía</h2>
+                    <p class="section-desc">Gestiona tu dinero, compra items y conviértete en el más rico del servidor.</p>
+                </div>
+                
+                <div class="command-grid">
+                    <!-- ECONOMY -->
+                    <div class="command-card" id="economy">
+                        <div class="command-header">
+                            <h3><i class="fas fa-chart-line"></i> /economy</h3>
+                            <span class="command-category">Economía</span>
+                        </div>
+                        <p class="command-desc">Sistema económico completo de Lumi. Gestiona tu dinero y progreso.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/economy [subcomando]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-list"></i> Subcomandos</h4>
+                            <ul class="feature-list">
+                                <li><strong>balance</strong> - Ver tu dinero en mano y banco</li>
+                                <li><strong>trabajo</strong> - Trabajar para ganar Nekos</li>
+                                <li><strong>transferir</strong> - Enviar dinero a otro usuario</li>
+                                <li><strong>tienda</strong> - Comprar items y mejoras</li>
+                                <li><strong>banco</strong> - Depositar o retirar Nekos</li>
+                                <li><strong>top</strong> - Ranking de los usuarios más ricos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECCIÓN RPG / ROLPLAY ==================== -->
+            <section id="rpg-section" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-gamepad section-icon"></i> RPG / Rolplay</h2>
+                    <p class="section-desc">Sistema de aventura completo con mazmorras, minería, crafting y mucho más.</p>
+                </div>
+                
+                <div class="command-grid">
+                    <!-- ROLPLAY -->
+                    <div class="command-card" id="rolplay">
+                        <div class="command-header">
+                            <h3><i class="fas fa-dragon"></i> /rolplay</h3>
+                            <span class="command-category">RPG</span>
+                        </div>
+                        <p class="command-desc">Sistema principal de aventuras. Explora, combate, mina y crea objetos en un mundo épico.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/rolplay [subcomando]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-list"></i> Subcomandos</h4>
+                            <ul class="feature-list">
+                                <li><strong>mazmorra</strong> - Enfréntate a enemigos y consigue botín</li>
+                                <li><strong>mina</strong> - Extrae recursos valiosos</li>
+                                <li><strong>inventario</strong> - Ver tus objetos coleccionados</li>
+                                <li><strong>craft</strong> - Crea objetos con tus materiales</li>
+                                <li><strong>perfil</strong> - Ver tu progreso en el RPG</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- PETS -->
+                    <div class="command-card" id="pets">
+                        <div class="command-header">
+                            <h3><i class="fas fa-cat"></i> /pets</h3>
+                            <span class="command-category">RPG</span>
+                        </div>
+                        <p class="command-desc">Sistema de mascotas virtuales. Adopta, alimenta y entrena a tu compañero.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/pets [subcomando]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-list"></i> Subcomandos</h4>
+                            <ul class="feature-list">
+                                <li><strong>adoptar</strong> - Consigue una nueva mascota</li>
+                                <li><strong>alimentar</strong> - Mantén feliz a tu mascota</li>
+                                <li><strong>jugar</strong> - Juega con tu mascota</li>
+                                <li><strong>entrenar</strong> - Mejora sus habilidades</li>
+                                <li><strong>evolucionar</strong> - Hazla más poderosa</li>
+                                <li><strong>batalla</strong> - Enfrenta tu mascota contra otras</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- LOGROS -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-trophy"></i> /logros</h3>
+                            <span class="command-category">RPG</span>
+                        </div>
+                        <p class="command-desc">Sistema de logros y achievements. Desbloquea recompensas al completar desafíos.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/logros [usuario]</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECCIÓN MÚSICA ==================== -->
+            <section id="music-section" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-music section-icon"></i> Comandos de Música</h2>
+                    <p class="section-desc">Reproduce música en tu canal de voz con el sistema de Lavalink.</p>
+                </div>
+                
+                <div class="command-grid">
+                    <!-- PLAY -->
+                    <div class="command-card" id="play">
+                        <div class="command-header">
+                            <h3><i class="fas fa-play"></i> /play</h3>
+                            <span class="command-category">Música</span>
+                        </div>
+                        <p class="command-desc">Reproduce música — pon el nombre de una canción o pega un enlace de YouTube/SoundCloud.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/play [canción o URL]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-info-circle"></i> Características</h4>
+                            <ul class="feature-list">
+                                <li>🎵 Búsqueda por nombre de canción/artista</li>
+                                <li>🔗 Soporte para enlaces de YouTube y SoundCloud</li>
+                                <li>📋 Sistema de cola de reproducción</li>
+                                <li>🎮 Panel de control con botones (pausa, saltar, loop)</li>
+                                <li>🔁 Modos de loop: canción, cola o desactivado</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="command-example">
+                            <h4><i class="fas fa-code"></i> Ejemplos</h4>
+                            <code class="copy-code">/play Bad Bunny Tití Me Preguntó</code><br>
+                            <code class="copy-code">/play https://youtube.com/watch?v=... </code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECCIÓN UTILIDADES ==================== -->
+            <section id="utilities-section" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-tools section-icon"></i> Utilidades</h2>
+                    <p class="section-desc">Comandos útiles para el día a día en el servidor.</p>
+                </div>
+                
+                <div class="command-grid">
+                    <!-- AFK -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-clock"></i> /afk</h3>
+                            <span class="command-category">Utilidad</span>
+                        </div>
+                        <p class="command-desc">Marca tu estado como ausente. Los usuarios serán notificados cuando te mencionen.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/afk [razón]</code>
+                        </div>
+                    </div>
+
+                    <!-- HELP -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-question-circle"></i> /help</h3>
+                            <span class="command-category">Utilidad</span>
+                        </div>
+                        <p class="command-desc">Muestra todos los comandos disponibles con descripciones y ejemplos de uso.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/help [comando]</code>
+                        </div>
+                    </div>
+
+                    <!-- INFO -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-info-circle"></i> /info</h3>
+                            <span class="command-category">Utilidad</span>
+                        </div>
+                        <p class="command-desc">Información técnica del bot: ping, versión, servidores conectados, uptime.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/info</code>
+                        </div>
+                    </div>
+
+                    <!-- REGLAS -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-book"></i> /reglas</h3>
+                            <span class="command-category">Utilidad</span>
+                        </div>
+                        <p class="command-desc">Muestra las reglas de todos los juegos disponibles en Lumi.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/reglas [juego]</code>
+                        </div>
+                    </div>
+
+                    <!-- USER -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-user"></i> /user</h3>
+                            <span class="command-category">Utilidad</span>
+                        </div>
+                        <p class="command-desc">Muestra información detallada de un usuario: rango, economía, logros, mascotas y más.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/user [usuario]</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECCIÓN MODERACIÓN ==================== -->
+            <section id="mod-section" class="docs-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-shield-hammer section-icon"></i> Moderación</h2>
+                    <p class="section-desc">Herramientas para administradores y moderadores del servidor.</p>
+                </div>
+                
+                <div class="command-grid">
+                    <!-- MOD -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <h3><i class="fas fa-gavel"></i> /mod</h3>
+                            <span class="command-category">Moderación</span>
+                        </div>
+                        <p class="command-desc">Panel de moderación del servidor. Gestiona warns, kicks, bans y configuración.</p>
+                        
+                        <div class="command-usage">
+                            <h4><i class="fas fa-terminal"></i> Uso</h4>
+                            <code class="copy-code">/mod [subcomando]</code>
+                        </div>
+                        
+                        <div class="command-params">
+                            <h4><i class="fas fa-list"></i> Subcomandos</h4>
+                            <ul class="feature-list">
+                                <li><strong>warn</strong> - Advertir a un usuario</li>
+                                <li><strong>kick</strong> - Expulsar del servidor</li>
+                                <li><strong>ban</strong> - Banear permanentemente</li>
+                                <li><strong>unban</strong> - Levantar ban</li>
+                                <li><strong>clear</strong> - Borrar mensajes en masa</li>
+                                <li><strong>logs</strong> - Ver historial de moderación</li>
+                                <li><strong>config</strong> - Configurar auto-mod</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== FAQ ==================== -->
+            <section id="faq" class="docs-section faq-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-question-circle section-icon"></i> Preguntas Frecuentes</h2>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>¿Cómo empiezo a jugar al RPG?</h3>
+                        <p>Usa el comando <code class="copy-code">/rolplay</code> para acceder al menú principal, luego explora la mazmorra o comienza minando recursos.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>¿Cómo consigo Nekos (la moneda)?</h3>
+                        <p>Puedes obtener Nekos trabajando con <code class="copy-code">/economy trabajo</code>, ganando en el casino con <code class="copy-code">/casino</code>, o vendiendo items en la tienda.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>¿Necesito Premium para algo?</h3>
+                        <p>No, todos los comandos básicos son gratuitos. Premium ofrece ventajas como recompensas dobles, acceso temprano a eventos y mascotas legendarias.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>¿Cómo obtengo mejores objetos en el RPG?</h3>
+                        <p>Combatiendo enemigos más fuertes en mazmorras, minando en biomas avanzados con <code class="copy-code">/rolplay mina</code> o creando objetos con <code class="copy-code">/rolplay craft</code>.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>¿Cómo funciona el sistema de música?</h3>
+                        <p>Usa <code class="copy-code">/play [canción]</code> para buscar música. Debes estar en un canal de voz. Luego usa los botones del panel para controlar la reproducción.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>¿Puedo jugar con amigos?</h3>
+                        <p>¡Sí! Puedes interactuar con otros usuarios con <code class="copy-code">/action</code>, jugar al casino, o formar grupos para el RPG.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>¿Qué son los logros?</h3>
+                        <p>Los logros son objetivos especiales que puedes completar. Usa <code class="copy-code">/logros</code> para ver tu progreso y desbloquear recompensas exclusivas.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>¿Cómo recupero stamina (⚡) para el RPG?</h3>
+                        <p>Usa el comando <code class="copy-code">/comer [item]</code> con cualquier consumible. La stamina también se regenera con el tiempo automáticamente.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-apple">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>LUMI DOCS</h4>
+                    <p>Documentación completa del bot LUMI. Todos los comandos, guías y tutoriales en un solo lugar.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="documentacion.html">Documentación</a></li>
+                        <li><a href="#rpg-section">Sistema RPG</a></li>
+                        <li><a href="#music-section">Música</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Servidor de Discord</a></li>
+                        <li><a href="#">Reportar Bug</a></li>
+                        <li><a href="#">Solicitar Característica</a></li>
+                        <li><a href="#">Estado del Servicio</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-legal">
+                <div class="legal-left">
+                    &copy; 2025 LUMI Bot. Todos los derechos reservados.
+                </div>
+                <div class="legal-right">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Uso</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón de cambio de tema -->
+    <div class="theme-toggle">
+        <button id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Botón Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Funcionalidad básica de búsqueda y copiado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Búsqueda de comandos
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const commandCards = document.querySelectorAll('.command-card');
+            
+            function filterCommands() {
+                const searchTerm = searchInput.value.toLowerCase();
+                let visibleCount = 0;
+                
+                commandCards.forEach(card => {
+                    const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                    const desc = card.querySelector('.command-desc')?.textContent.toLowerCase() || '';
+                    const tags = card.textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || desc.includes(searchTerm) || (searchTerm && tags.includes(searchTerm))) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Mostrar mensaje si no hay resultados
+                const noResults = document.querySelector('.no-results');
+                if (visibleCount === 0 && searchTerm) {
+                    if (!noResults) {
+                        const msg = document.createElement('div');
+                        msg.className = 'no-results';
+                        msg.innerHTML = '<p><i class="fas fa-search"></i> No se encontraron comandos con "<strong>' + searchTerm + '</strong>"</p>';
+                        document.querySelector('.docs-content').insertBefore(msg, document.querySelector('.docs-content').firstChild);
+                    } else {
+                        noResults.style.display = 'block';
+                        noResults.innerHTML = '<p><i class="fas fa-search"></i> No se encontraron comandos con "<strong>' + searchTerm + '</strong>"</p>';
+                    }
+                } else if (noResults) {
+                    noResults.style.display = 'none';
+                }
+            }
+            
+            searchInput?.addEventListener('input', filterCommands);
+            searchButton?.addEventListener('click', filterCommands);
+            
+            // Funcionalidad de copiado
+            document.querySelectorAll('.copy-code').forEach(codeBlock => {
+                codeBlock.addEventListener('click', function() {
+                    const text = this.textContent;
+                    navigator.clipboard.writeText(text);
+                    
+                    const originalHTML = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
+                    setTimeout(() => {
+                        this.innerHTML = originalHTML;
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+    
+    <style>
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .tag {
+            background: var(--primary-color, #5865F2);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .feature-list {
+            margin: 0.5rem 0 0 1rem;
+            padding-left: 0;
+        }
+        
+        .feature-list li {
+            margin: 0.25rem 0;
+            color: var(--text-secondary);
+        }
+        
+        .games-list {
+            margin: 0.5rem 0 0 1rem;
+        }
+        
+        .games-list li {
+            margin: 0.25rem 0;
+            color: var(--text-secondary);
+        }
+        
+        .no-results {
+            background: rgba(88, 101, 242, 0.1);
+            border-left: 4px solid #5865F2;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .command-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
