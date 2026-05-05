@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumi Sentinel — Seguridad Premium para Discord</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #ff2d55;
+      --orange: #ff6b00;
+      --bg: #060608;
+      --surface: #0d0d10;
+      --surface2: #13131a;
+      --text: #f0f0f5;
+      --muted: #6a6a80;
+      --border: rgba(255,255,255,0.07);
+      --glow: rgba(255,45,85,0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+    }
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: white;
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      transform: translate(-50%,-50%);
+      transition: transform 0.1s;
+    }
+    .cursor-ring {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      transform: translate(-50%,-50%);
+      transition: all 0.15s ease;
+    }
+
+    /* NOISE TEXTURE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: all 0.4s;
+      backdrop-filter: blur(0px);
+    }
+    nav.scrolled {
+      background: rgba(6,6,8,0.85);
+      border-color: var(--border);
+      backdrop-filter: blur(20px);
+      padding: 14px 60px;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: white;
+      color: black !important;
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: #e0e0e0; color: black !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 120px 24px 80px;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(255,45,85,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,45,85,0.1);
+      border: 1px solid rgba(255,45,85,0.25);
+      padding: 6px 18px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #ff6a88;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      animation: fadeInDown 0.8s ease both;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+      animation: fadeInUp 0.9s 0.1s ease both;
+    }
+
+    .hero-title-line1 { display: block; color: var(--text); }
+    .hero-title-line2 {
+      display: block;
+      background: linear-gradient(135deg, var(--red) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 24px auto 48px;
+      font-weight: 300;
+      line-height: 1.7;
+      animation: fadeInUp 0.9s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.9s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      color: white;
+      border: none;
+      padding: 16px 36px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: white;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(255,45,85,0.4); }
+    .btn-primary:hover::after { opacity: 0.1; }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 16px 32px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+    .hero-visual {
+      width: 100%;
+      max-width: 900px;
+      margin: 80px auto 0;
+      position: relative;
+      animation: fadeInUp 1s 0.4s ease both;
+    }
+
+    /* MOCKUP DE STATS / DASHBOARD */
+    .dashboard-mock {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 60px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    .dashboard-mock::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 200px;
+      background: radial-gradient(ellipse, rgba(255,45,85,0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .dash-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .dash-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+    .dash-dot:nth-child(1) { background: #ff5f57; }
+    .dash-dot:nth-child(2) { background: #febc2e; }
+    .dash-dot:nth-child(3) { background: #28c840; }
+    .dash-title-bar {
+      flex: 1;
+      height: 12px;
+      background: var(--surface2);
+      border-radius: 6px;
+      margin: 0 16px;
+    }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .dash-stat {
+      background: var(--surface2);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .dash-stat-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .dash-stat-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+    .dash-stat-val.red { color: var(--red); }
+    .dash-stat-val.orange { color: var(--orange); }
+    .dash-stat-val.green { color: #30d158; }
+    .dash-stat-val.white { color: var(--text); }
+    .dash-stat-change {
+      font-size: 0.7rem;
+      color: #30d158;
+      margin-top: 4px;
+    }
+
+    .dash-bottom {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+    }
+
+    .dash-threats {
+      background: var(--surface2);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .dash-threats-title {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .threat-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .threat-label { font-size: 0.75rem; color: #aaa; width: 100px; flex-shrink: 0; }
+    .threat-bar-bg {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .threat-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--red), var(--orange));
+    }
+    .threat-count { font-size: 0.75rem; color: var(--muted); width: 30px; text-align: right; }
+
+    .dash-modules {
+      background: var(--surface2);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .dash-modules-title {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .module-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .mod-name { font-size: 0.78rem; color: #ccc; }
+    .mod-pill {
+      font-size: 0.65rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-weight: 600;
+    }
+    .mod-on { background: rgba(48,209,88,0.15); color: #30d158; border: 1px solid rgba(48,209,88,0.3); }
+    .mod-off { background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+    .lockdown-banner {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, rgba(255,45,85,0.2), rgba(255,107,0,0.1));
+      border: 1px solid rgba(255,45,85,0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #ff8099;
+    }
+    .lockdown-dot {
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: blink 1s infinite;
+    }
+
+    /* STATS SECTION */
+    .stats-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 24px;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: var(--surface);
+      position: relative;
+      z-index: 1;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 0 60px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--text), var(--muted));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.03em;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+
+    /* MÓDULOS */
+    .section {
+      padding: 120px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .section-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .section-body {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 500px;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* MÓDULOS GRID */
+    .modules-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border-radius: 32px;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+
+    .mod-block {
+      background: var(--surface);
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .mod-block:hover { background: var(--surface2); }
+    .mod-block.featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .mod-block-icon {
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .mod-block-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .mod-block-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .mod-block-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .tag {
+      font-size: 0.7rem;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* DETECTIONS */
+    .detections-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 80px;
+    }
+
+    .detection-list {
+      list-style: none;
+    }
+    .detection-item {
+      display: flex;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .detection-item:first-child { border-top: 1px solid var(--border); }
+    .detection-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,45,85,0.1);
+      border: 1px solid rgba(255,45,85,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .detection-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .detection-example {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+      background: rgba(255,255,255,0.04);
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .scam-visual {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      position: sticky;
+      top: 100px;
+    }
+
+    .scam-vis-header {
+      background: var(--surface2);
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scam-msg {
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .scam-msg.blocked {
+      background: rgba(255,45,85,0.04);
+    }
+    .scam-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .scam-msg-text { font-size: 0.82rem; line-height: 1.5; color: #ccc; }
+    .scam-msg-name { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; }
+    .scam-link { color: #7b9ef7; text-decoration: underline; }
+    .scam-blocked-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,45,85,0.08);
+      border: 1px solid rgba(255,45,85,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #ff8099;
+      backdrop-filter: blur(2px);
+    }
+    .scam-blocked-overlay::before { content: '🛡️'; }
+
+    /* FEATURE BENTO */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+      margin-top: 80px;
+    }
+
+    .bento-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .bento-card:hover {
+      border-color: rgba(255,45,85,0.25);
+      transform: translateY(-4px);
+    }
+    .bento-card.span2 { grid-column: span 2; }
+    .bento-card.span3 { grid-column: span 3; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: center; }
+
+    .bento-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .bento-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--text), rgba(255,255,255,0.5));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .bento-desc {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 10px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .bento-highlight {
+      background: linear-gradient(135deg, rgba(255,45,85,0.08), rgba(255,107,0,0.05));
+      border-color: rgba(255,45,85,0.15);
+    }
+
+    .bento-accent {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .bento-accent-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* LOCKDOWN VISUAL */
+    .lockdown-card {
+      background: linear-gradient(135deg, #0d0005, #100005);
+      border-color: rgba(255,45,85,0.2) !important;
+    }
+    .lockdown-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    .lockdown-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+    .lockdown-bar-fill {
+      height: 100%;
+      width: 65%;
+      background: linear-gradient(90deg, var(--red), var(--orange));
+      border-radius: 100px;
+      animation: grow 3s ease-in-out infinite alternate;
+    }
+    @keyframes grow {
+      from { width: 30%; }
+      to { width: 85%; }
+    }
+    .lockdown-timer {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--red);
+      margin-top: 8px;
+    }
+
+    /* PRICING */
+    .pricing-section {
+      padding: 120px 60px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+    .pricing-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 60px;
+      text-align: left;
+    }
+
+    .pricing-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .pricing-card:hover { border-color: rgba(255,255,255,0.15); }
+    .pricing-card.premium {
+      background: linear-gradient(135deg, rgba(255,45,85,0.08), rgba(255,107,0,0.04));
+      border-color: rgba(255,45,85,0.3);
+    }
+    .pricing-card.premium:hover { border-color: rgba(255,45,85,0.5); }
+
+    .premium-star {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .price-plan { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+    .price-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+    .price-period { font-size: 0.8rem; color: var(--muted); }
+    .price-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 28px 0;
+    }
+    .price-feature {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 0.875rem;
+      align-items: flex-start;
+    }
+    .price-feature-check { color: #30d158; flex-shrink: 0; }
+    .price-feature-lock { color: var(--muted); flex-shrink: 0; }
+    .price-feature-text { color: #ccc; line-height: 1.4; }
+    .price-feature-text.locked { color: var(--muted); }
+
+    .price-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 28px;
+      transition: all 0.3s;
+    }
+    .price-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+    .price-btn.main {
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      border: none;
+      color: white;
+    }
+    .price-btn.main:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,45,85,0.4); }
+
+    /* FAQ */
+    .faq-list {
+      margin-top: 60px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .faq-q-icon { color: var(--muted); transition: transform 0.3s; font-size: 1.2rem; }
+    .faq-item.open .faq-q-icon { transform: rotate(45deg); color: var(--red); }
+    .faq-a {
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.7;
+      font-weight: 300;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+    }
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding-top: 16px;
+    }
+
+    /* CTA FINAL */
+    .final-cta {
+      padding: 160px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .final-cta-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(255,45,85,0.12), transparent 70%);
+      pointer-events: none;
+    }
+    .final-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+    .final-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface);
+      position: relative;
+      z-index: 1;
+    }
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .footer-note { font-size: 0.8rem; color: var(--muted); }
+
+    /* ANIMATIONS */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      nav.scrolled { padding: 12px 24px; }
+      .nav-links { display: none; }
+      .section { padding: 80px 24px; }
+      .modules-layout { grid-template-columns: 1fr; }
+      .mod-block.featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .detections-layout { grid-template-columns: 1fr; }
+      .bento { grid-template-columns: 1fr; }
+      .bento-card.span2, .bento-card.span3 { grid-column: span 1; }
+      .bento-card.span3 { grid-template-columns: 1fr; gap: 24px; }
+      .pricing-cards { grid-template-columns: 1fr; }
+      .stats-strip { flex-wrap: wrap; gap: 40px; }
+      .stat-item { border-right: none; padding: 0 20px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      .dash-grid { grid-template-columns: repeat(2,1fr); }
+      .dash-bottom { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="dot"></div>
+  <div class="cursor-ring" id="ring"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">🛡️</div>
+      Lumi Sentinel
+    </div>
+    <ul class="nav-links">
+      <li><a href="#modulos">Módulos</a></li>
+      <li><a href="#detecciones">Detecciones</a></li>
+      <li><a href="#features">Funciones</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#cta" class="nav-cta">Activar →</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-eyebrow">Exclusivo Premium · LumiBot</div>
+
+    <h1 class="hero-title">
+      <span class="hero-title-line1">Protección</span>
+      <span class="hero-title-line2">Sin Límites</span>
+    </h1>
+
+    <p class="hero-sub">El sistema de seguridad más completo para Discord. Moderación autónoma, detección inteligente de amenazas y control total para tu comunidad.</p>
+
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary">Activar Sentinel ✦</a>
+      <a href="#modulos" class="btn-ghost">Ver módulos →</a>
+    </div>
+
+    <div class="hero-visual">
+      <div class="dashboard-mock">
+        <div class="lockdown-banner">
+          <div class="lockdown-dot"></div>
+          Sentinel activo · 24 amenazas hoy
+        </div>
+
+        <div class="dash-header">
+          <div class="dash-dot"></div>
+          <div class="dash-dot"></div>
+          <div class="dash-dot"></div>
+          <div class="dash-title-bar"></div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="dash-stat">
+            <div class="dash-stat-label">Ataques bloq.</div>
+            <div class="dash-stat-val red">1,247</div>
+            <div class="dash-stat-change">↑ 12% este mes</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">Msgs eliminados</div>
+            <div class="dash-stat-val orange">394</div>
+            <div class="dash-stat-change">↑ 8% esta semana</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">Usuarios sanc.</div>
+            <div class="dash-stat-val white">89</div>
+            <div class="dash-stat-change">↓ 3% este mes</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">Uptime</div>
+            <div class="dash-stat-val green">99.9%</div>
+            <div class="dash-stat-change">↔ sin cambios</div>
+          </div>
+        </div>
+
+        <div class="dash-bottom">
+          <div class="dash-threats">
+            <div class="dash-threats-title">Amenazas detectadas</div>
+            <div class="threat-bar-row">
+              <div class="threat-label">Phishing</div>
+              <div class="threat-bar-bg"><div class="threat-bar-fill" style="width:85%"></div></div>
+              <div class="threat-count">423</div>
+            </div>
+            <div class="threat-bar-row">
+              <div class="threat-label">Anti-Raid</div>
+              <div class="threat-bar-bg"><div class="threat-bar-fill" style="width:62%"></div></div>
+              <div class="threat-count">310</div>
+            </div>
+            <div class="threat-bar-row">
+              <div class="threat-label">Spam</div>
+              <div class="threat-bar-bg"><div class="threat-bar-fill" style="width:47%"></div></div>
+              <div class="threat-count">235</div>
+            </div>
+            <div class="threat-bar-row">
+              <div class="threat-label">Dox</div>
+              <div class="threat-bar-bg"><div class="threat-bar-fill" style="width:28%"></div></div>
+              <div class="threat-count">140</div>
+            </div>
+            <div class="threat-bar-row">
+              <div class="threat-label">Homograph</div>
+              <div class="threat-bar-bg"><div class="threat-bar-fill" style="width:18%"></div></div>
+              <div class="threat-count">89</div>
+            </div>
+          </div>
+
+          <div class="dash-modules">
+            <div class="dash-modules-title">Estado módulos</div>
+            <div class="module-status">
+              <div class="mod-name">🛡️ Anti-Raid</div>
+              <div class="mod-pill mod-on">ON</div>
+            </div>
+            <div class="module-status">
+              <div class="mod-name">🎣 Anti-Scam</div>
+              <div class="mod-pill mod-on">ON</div>
+            </div>
+            <div class="module-status">
+              <div class="mod-name">🔏 Anti-Dox</div>
+              <div class="mod-pill mod-on">ON</div>
+            </div>
+            <div class="module-status">
+              <div class="mod-name">⚡ Anti-Spam</div>
+              <div class="mod-pill mod-on">ON</div>
+            </div>
+            <div class="module-status">
+              <div class="mod-name">🎫 Tickets</div>
+              <div class="mod-pill mod-on">ON</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Tipos de ataque detectados</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Módulos de protección</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">15min</div>
+      <div class="stat-label">Lockdown automático</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">99.9%</div>
+      <div class="stat-label">Tiempo activo</div>
+    </div>
+  </div>
+
+  <!-- MÓDULOS -->
+  <section class="section" id="modulos">
+    <div class="reveal">
+      <div class="section-eyebrow">Módulos de protección</div>
+      <h2 class="section-heading">Cinco escudos.<br>Un sistema.</h2>
+      <p class="section-body">Cada módulo es una capa de defensa independiente que trabaja en conjunto para mantener tu servidor seguro las 24 horas.</p>
+    </div>
+
+    <div class="modules-layout reveal">
+      <div class="mod-block featured">
+        <div>
+          <span class="mod-block-icon">🛡️</span>
+          <div class="mod-block-name">Anti-Raid</div>
+          <div class="mod-block-desc">Protección proactiva contra raids masivos. Detecta patrones de entrada anómalos, bloquea cuentas nuevas y activa lockdown automático cuando se supera el umbral crítico de joins por minuto.</div>
+          <div class="mod-block-tags">
+            <span class="tag">Joins/min configurable</span>
+            <span class="tag">Edad mínima de cuenta</span>
+            <span class="tag">Avatar requerido</span>
+            <span class="tag">Nombres similares</span>
+            <span class="tag">Lockdown automático</span>
+          </div>
+        </div>
+        <div style="background: var(--surface2); border-radius: 20px; padding: 24px; border: 1px solid var(--border);">
+          <!-- Raid visual -->
+          <div style="font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;">Detección en tiempo real</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 12px; background: rgba(255,45,85,0.08); border: 1px solid rgba(255,45,85,0.2); border-radius: 12px; padding: 12px 14px;">
+              <div style="width: 28px; height: 28px; background: rgba(255,45,85,0.2); border-radius: 50%; flex-shrink: 0;"></div>
+              <div style="flex: 1;">
+                <div style="font-size: 0.78rem; color: #ff8099; font-weight: 600;">raid_bot_1294 — BLOQUEADO</div>
+                <div style="font-size: 0.7rem; color: var(--muted);">Cuenta creada hace 2 días · Sin avatar</div>
+              </div>
+              <div style="font-size: 0.75rem; color: var(--red); font-weight: 700;">KICK</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: rgba(255,45,85,0.08); border: 1px solid rgba(255,45,85,0.2); border-radius: 12px; padding: 12px 14px;">
+              <div style="width: 28px; height: 28px; background: rgba(255,45,85,0.2); border-radius: 50%; flex-shrink: 0;"></div>
+              <div style="flex: 1;">
+                <div style="font-size: 0.78rem; color: #ff8099; font-weight: 600;">nuke_attempt_07 — BLOQUEADO</div>
+                <div style="font-size: 0.7rem; color: var(--muted);">Palabra prohibida en nombre · Patrón de raid</div>
+              </div>
+              <div style="font-size: 0.75rem; color: var(--red); font-weight: 700;">KICK</div>
+            </div>
+            <div style="text-align: center; font-size: 0.75rem; color: var(--muted); padding: 8px 0;">
+              🔒 Lockdown activado · 12 joins en 60 seg
+            </div>
+            <div style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 100px; overflow: hidden;">
+              <div style="width: 75%; height: 100%; background: linear-gradient(90deg, var(--red), var(--orange)); border-radius: 100px;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted);">
+              <span>Límite: 8/min</span>
+              <span style="color: var(--red); font-weight: 600;">12/min — CRÍTICO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mod-block">
+        <span class="mod-block-icon">🎣</span>
+        <div class="mod-block-name">Anti-Scam</div>
+        <div class="mod-block-desc">Detecta phishing, typosquatting, ataques homograph, caracteres de ancho cero y TLDs sospechosos antes de que el daño ocurra. Bloqueo automático e instantáneo.</div>
+        <div class="mod-block-tags">
+          <span class="tag">Typosquatting</span>
+          <span class="tag">Homograph Attack</span>
+          <span class="tag">Free Nitro</span>
+          <span class="tag">TLDs peligrosos</span>
+        </div>
+      </div>
+
+      <div class="mod-block">
+        <span class="mod-block-icon">🔏</span>
+        <div class="mod-block-name">Anti-Dox</div>
+        <div class="mod-block-desc">Protege la privacidad real de tus usuarios. Detecta y elimina automáticamente DNI, emails, teléfonos y direcciones IP con modo suave o estricto.</div>
+        <div class="mod-block-tags">
+          <span class="tag">DNI / CURP</span>
+          <span class="tag">Teléfonos</span>
+          <span class="tag">Emails</span>
+          <span class="tag">IPs</span>
+          <span class="tag">Modo estricto</span>
+        </div>
+      </div>
+
+      <div class="mod-block">
+        <span class="mod-block-icon">⚡</span>
+        <div class="mod-block-name">Anti-Spam</div>
+        <div class="mod-block-desc">Control inteligente de mensajes repetitivos. Mute automático configurable con umbral de mensajes por minuto para mantener el orden en tu servidor.</div>
+        <div class="mod-block-tags">
+          <span class="tag">10 msgs/min</span>
+          <span class="tag">Mute 5 min</span>
+          <span class="tag">Configurable</span>
+        </div>
+      </div>
+
+      <div class="mod-block">
+        <span class="mod-block-icon">🎫</span>
+        <div class="mod-block-name">Tickets</div>
+        <div class="mod-block-desc">Sistema completo de soporte con paneles personalizables, transcripts automáticos y auto-cierre por inactividad. Tu equipo de soporte potenciado.</div>
+        <div class="mod-block-tags">
+          <span class="tag">Paneles custom</span>
+          <span class="tag">Transcripts</span>
+          <span class="tag">Auto-cierre</span>
+          <span class="tag">Roles de soporte</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETECCIONES ANTI-SCAM -->
+  <section class="section" id="detecciones" style="padding-top: 0;">
+    <div class="reveal">
+      <div class="section-eyebrow">Anti-Scam · En detalle</div>
+      <h2 class="section-heading">Detecta lo que<br>el ojo humano no ve.</h2>
+      <p class="section-body">Algoritmos diseñados para identificar los métodos de engaño más sofisticados en Discord.</p>
+    </div>
+
+    <div class="detections-layout reveal">
+      <ul class="detection-list">
+        <li class="detection-item">
+          <div class="detection-icon">🔤</div>
+          <div>
+            <div class="detection-name">Typosquatting</div>
+            <div class="detection-example">dlscord.com → discord.com</div>
+          </div>
+        </li>
+        <li class="detection-item">
+          <div class="detection-icon">🎭</div>
+          <div>
+            <div class="detection-name">Homograph Attack</div>
+            <div class="detection-example">Caracteres Unicode que imitan letras reales</div>
+          </div>
+        </li>
+        <li class="detection-item">
+          <div class="detection-icon">🎁</div>
+          <div>
+            <div class="detection-name">Phishing — Free Nitro</div>
+            <div class="detection-example">"free nitro" + enlace sospechoso</div>
+          </div>
+        </li>
+        <li class="detection-item">
+          <div class="detection-icon">👁️</div>
+          <div>
+            <div class="detection-name">Zero-Width Characters</div>
+            <div class="detection-example">Caracteres invisibles para ofuscar URLs</div>
+          </div>
+        </li>
+        <li class="detection-item">
+          <div class="detection-icon">⚠️</div>
+          <div>
+            <div class="detection-name">TLDs sospechosos</div>
+            <div class="detection-example">.tk · .ml · .ga · .xyz · .top</div>
+          </div>
+        </li>
+        <li class="detection-item">
+          <div class="detection-icon">🔗</div>
+          <div>
+            <div class="detection-name">Invites no autorizados</div>
+            <div class="detection-example">discord.gg/xxxxx sin whitelist</div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- CHAT VISUAL MOCKUP -->
+      <div class="scam-visual">
+        <div class="scam-vis-header">
+          <div style="width: 8px; height: 8px; background: var(--red); border-radius: 50;"></div>
+          #general · Simulación de detección
+        </div>
+
+        <div class="scam-msg">
+          <div class="scam-avatar" style="background: linear-gradient(135deg,#5865f2,#3b44ac);"></div>
+          <div>
+            <div class="scam-msg-name">usuario_normal</div>
+            <div class="scam-msg-text">Hey alguien vio el partido de ayer? estuvo increíble</div>
+          </div>
+        </div>
+
+        <div class="scam-msg">
+          <div class="scam-avatar" style="background: linear-gradient(135deg,#57f287,#2ea55e);"></div>
+          <div>
+            <div class="scam-msg-name">admin_team</div>
+            <div class="scam-msg-text">Sí jaja brutal! 🔥</div>
+          </div>
+        </div>
+
+        <div class="scam-msg blocked">
+          <div class="scam-avatar" style="background: rgba(255,45,85,0.3); border: 1px solid rgba(255,45,85,0.5);"></div>
+          <div>
+            <div class="scam-msg-name" style="color: rgba(255,100,120,0.7);">user_49201</div>
+            <div class="scam-msg-text" style="opacity: 0.5;">🎁 FREE NITRO! Click here: <span class="scam-link">dlscоrd.com/gift/...</span></div>
+          </div>
+          <div class="scam-blocked-overlay">PHISHING BLOQUEADO</div>
+        </div>
+
+        <div style="padding: 12px 20px; background: rgba(255,45,85,0.06); border-top: 1px solid rgba(255,45,85,0.15);">
+          <div style="font-size: 0.72rem; color: #ff8099; font-weight: 600; margin-bottom: 4px;">🛡️ Sentinel detectó una amenaza</div>
+          <div style="font-size: 0.7rem; color: var(--muted);">Typosquatting + Phishing · Mensaje eliminado · Timeout aplicado · Log registrado</div>
+        </div>
+
+        <div class="scam-msg">
+          <div class="scam-avatar" style="background: linear-gradient(135deg,#5865f2,#3b44ac);"></div>
+          <div>
+            <div class="scam-msg-name">usuario_normal</div>
+            <div class="scam-msg-text">Menos mal que Sentinel cuida el server 👏</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENTO FEATURES -->
+  <section class="section" id="features">
+    <div class="reveal">
+      <div class="section-eyebrow">Funciones avanzadas</div>
+      <h2 class="section-heading">Control total.<br>Sin compromisos.</h2>
+    </div>
+
+    <div class="bento reveal">
+      <!-- LOCKDOWN -->
+      <div class="bento-card lockdown-card">
+        <div class="lockdown-icon">🔒</div>
+        <div class="bento-accent">Modo Seguro</div>
+        <div class="bento-accent-desc">Lockdown total con un botón. Bloquea todos los canales públicos de forma instantánea.</div>
+        <div class="lockdown-bar">
+          <div class="lockdown-bar-fill"></div>
+        </div>
+        <div class="lockdown-timer">15:00</div>
+      </div>
+
+      <!-- STATS -->
+      <div class="bento-card bento-highlight">
+        <div class="bento-label">Mensajes revisados</div>
+        <div class="bento-value">∞</div>
+        <div class="bento-desc">Sentinel analiza cada mensaje en tiempo real sin afectar el rendimiento del servidor.</div>
+      </div>
+
+      <!-- JOINS -->
+      <div class="bento-card">
+        <div class="bento-label">Limit de joins</div>
+        <div class="bento-value">8<span style="font-size: 1.5rem; color: var(--muted)">/min</span></div>
+        <div class="bento-desc">Umbral configurable. Al superarse, lockdown automático de 15 minutos.</div>
+      </div>
+
+      <!-- TRIPLE STAT -->
+      <div class="bento-card span3">
+        <div>
+          <div class="bento-label">Activación</div>
+          <div class="bento-accent">Manual o automática</div>
+          <div class="bento-accent-desc">El lockdown se activa cuando Anti-Raid detecta un ataque crítico o por comando directo del administrador.</div>
+        </div>
+        <div>
+          <div class="bento-label">Duración</div>
+          <div class="bento-accent">5 a 60 minutos</div>
+          <div class="bento-accent-desc">Configurable según el nivel de la amenaza. Reversión automática al terminar el tiempo.</div>
+        </div>
+        <div>
+          <div class="bento-label">Estadísticas</div>
+          <div class="bento-accent">Dashboard en vivo</div>
+          <div class="bento-accent-desc">Ataques bloqueados · Mensajes eliminados · Usuarios sancionados · Verificaciones completadas.</div>
+        </div>
+      </div>
+
+      <!-- TICKET -->
+      <div class="bento-card span2">
+        <div class="bento-label">Sistema de tickets</div>
+        <div class="bento-accent">Soporte profesional integrado</div>
+        <div class="bento-accent-desc">Paneles personalizables con título, descripción, color y emoji. Transcripts automáticos y auto-cierre por inactividad para mantener tu equipo organizado.</div>
+        <div class="mod-block-tags" style="margin-top: 20px;">
+          <span class="tag">Panel custom</span>
+          <span class="tag">Rol de soporte</span>
+          <span class="tag">Transcripts</span>
+          <span class="tag">Auto-purga</span>
+          <span class="tag">Logs completos</span>
+        </div>
+      </div>
+
+      <!-- PERMISSION -->
+      <div class="bento-card">
+        <div class="bento-label">Control de acceso</div>
+        <div class="bento-accent">Solo admins Premium</div>
+        <div class="bento-accent-desc">Doble verificación: Premium + Administrador de Discord. Sin excepciones.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="precios">
+    <div class="pricing-inner">
+      <div class="reveal">
+        <div class="section-eyebrow" style="text-align: center;">Planes</div>
+        <h2 class="section-heading" style="text-align: center;">Elige tu nivel<br>de protección</h2>
+        <p class="section-body" style="margin: 0 auto 0; text-align: center;">Ambos planes incluyen acceso completo a LumiBot. Sentinel es el escudo adicional para quienes en serio protegen su comunidad.</p>
+      </div>
+
+      <div class="pricing-cards reveal">
+        <div class="pricing-card">
+          <div class="price-plan">Gratuito</div>
+          <div class="price-val">$0</div>
+          <div class="price-period">Para siempre</div>
+          <div class="price-divider"></div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">Comandos básicos de LumiBot</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">Moderación manual</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">Logs básicos</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-lock">🔒</span>
+            <span class="price-feature-text locked">Anti-Raid automático</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-lock">🔒</span>
+            <span class="price-feature-text locked">Anti-Scam inteligente</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-lock">🔒</span>
+            <span class="price-feature-text locked">Modo Lockdown</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-lock">🔒</span>
+            <span class="price-feature-text locked">Dashboard de estadísticas</span>
+          </div>
+          <button class="price-btn" onclick="alert('Ya tienes acceso gratuito al bot en tu servidor de Discord.')">Plan actual</button>
+        </div>
+
+        <div class="pricing-card premium">
+          <div class="premium-star">SENTINEL</div>
+          <div class="price-plan">Premium</div>
+          <div class="price-val">Contactar</div>
+          <div class="price-period">Por servidor o usuario</div>
+          <div class="price-divider"></div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">Todo lo del plan gratuito</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">🛡️ Anti-Raid completo + Lockdown</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">🎣 Anti-Scam con 6+ tipos de detección</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">🔏 Anti-Dox modo estricto</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">⚡ Anti-Spam configurable</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">🎫 Sistema de Tickets Premium</span>
+          </div>
+          <div class="price-feature">
+            <span class="price-feature-check">✓</span>
+            <span class="price-feature-text">📊 Dashboard de estadísticas en vivo</span>
+          </div>
+          <button class="price-btn main" onclick="alert('Contacta a un administrador de LumiBot en Discord para activar tu plan Premium.')">Activar Sentinel ✦</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="pricing-inner" style="max-width: 100%;">
+      <div class="reveal" style="text-align: center;">
+        <div class="section-eyebrow">FAQ</div>
+        <h2 class="section-heading">Preguntas frecuentes</h2>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿Necesito ser administrador para usar Sentinel?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Sí. El acceso a /automod requiere doble verificación: ser premium (servidor o usuario) y tener el rol de Administrador en Discord. Esto garantiza que solo personas responsables gestionen la seguridad.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿Cómo activo el plan Premium?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Debes contactar a un administrador de LumiBot en Discord. El premium puede activarse a nivel de servidor o de usuario individual.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿El lockdown afecta a todos los canales?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">El Modo Seguro bloquea el envío de mensajes en todos los canales públicos configurados. La reversión es automática al terminar el tiempo definido (entre 5 y 60 minutos).</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿Sentinel puede activar el lockdown solo?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Sí. Si Anti-Raid detecta un ataque crítico (supera el umbral configurable de joins por minuto), activa automáticamente el lockdown por 15 minutos por defecto. También puede activarse manualmente.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿Qué datos personales detecta Anti-Dox?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Detecta DNI/CURP, correos electrónicos, números de teléfono y direcciones IP. En modo estricto elimina el mensaje, aplica timeout al usuario y registra una advertencia.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            ¿El bot afecta el rendimiento del servidor de Discord?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">No. Sentinel analiza mensajes de forma asíncrona y eficiente. El bot mantiene un uptime del 99.9% sin generar latencia perceptible para los usuarios.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" id="cta">
+    <div class="final-cta-glow"></div>
+    <div class="hero-grid" style="mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, black 20%, transparent 80%);"></div>
+
+    <div class="reveal" style="position: relative; z-index: 1;">
+      <h2 class="final-title">Tu servidor merece<br><span style="background: linear-gradient(135deg, var(--red), var(--orange)); -webkit-background-clip: text; background-clip: text; color: transparent;">protección real.</span></h2>
+      <p class="final-sub">Un raid puede destruir años de comunidad en segundos.<br>Sentinel no deja que eso pase.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary" onclick="alert('Contacta a un administrador de LumiBot en Discord para activar Premium.'); return false;">
+          Activar Sentinel Premium ✦
+        </a>
+        <a href="#modulos" class="btn-ghost">Ver módulos →</a>
+      </div>
+      <p style="margin-top: 24px; font-size: 0.8rem; color: var(--muted);">Requiere Premium y rol de Administrador · Solo para Discord</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">🛡️ Lumi Sentinel</div>
+    <div class="footer-note">Parte del ecosistema LumiBot · Protección premium para Discord</div>
+    <div class="footer-note">© 2025 LumiBot. Todos los derechos reservados.</div>
+  </footer>
+
+  <script>
+    // CURSOR
+    const dot = document.getElementById('dot');
+    const ring = document.getElementById('ring');
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top = mouseY + 'px';
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .mod-block, .bento-card, .faq-q').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.width = '60px';
+        ring.style.height = '60px';
+        ring.style.borderColor = 'rgba(255,45,85,0.6)';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.width = '40px';
+        ring.style.height = '40px';
+        ring.style.borderColor = 'rgba(255,255,255,0.5)';
+      });
+    });
+
+    // NAV SCROLL
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // REVEAL ON SCROLL
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // FAQ
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // COUNTER ANIMATION
+    function animateCounter(el, target, suffix = '') {
+      let start = 0;
+      const duration = 2000;
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(eased * target);
+        el.textContent = current.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const statsObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statNums = entry.target.querySelectorAll('.stat-num');
+          statNums.forEach(el => {
+            const text = el.textContent;
+            if (text.includes('6+')) animateCounter(el, 6, '+');
+            else if (text.includes('%')) { /* skip */ }
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsStrip = document.querySelector('.stats-strip');
+    if (statsStrip) statsObserver.observe(statsStrip);
+  </script>
+</body>
+</html>

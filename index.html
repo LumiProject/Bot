@@ -16,7 +16,6 @@
     <meta property="og:description" content="El bot de Discord más completo con juegos, economía, RPG y diversión sin límites.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lumiproject.github.io/Bot/">
-
     <meta property="og:image" content="https://lumiproject.github.io/Bot/Banner_Page.gif">
     <meta property="og:image:type" content="image/gif">
     <meta property="og:image:width" content="1200">
@@ -28,6 +27,388 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =============================================
+           LUMI SENTINEL — SECCIÓN INTEGRADA
+           ============================================= */
+
+        #sentinel-section {
+            position: relative;
+            padding: 0;
+            overflow: hidden;
+            background: #060608;
+        }
+
+        /* Transición suave desde el tema rosa al negro */
+        .sentinel-transition-top {
+            height: 120px;
+            background: linear-gradient(to bottom, transparent, #060608);
+            position: relative;
+            z-index: 2;
+            margin-top: -120px;
+            pointer-events: none;
+        }
+        .sentinel-transition-bottom {
+            height: 120px;
+            background: linear-gradient(to top, transparent, #060608);
+            position: relative;
+            z-index: 2;
+            margin-bottom: -120px;
+            pointer-events: none;
+        }
+
+        .sentinel-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 32px 120px;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* GRID DE FONDO */
+        .sentinel-bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+            pointer-events: none;
+        }
+
+        /* Glow rojo de fondo */
+        .sentinel-bg-glow {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(255,45,85,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* EYEBROW */
+        .sentinel-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,45,85,0.1);
+            border: 1px solid rgba(255,45,85,0.3);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #ff8099;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        .sentinel-eyebrow-dot {
+            width: 6px; height: 6px;
+            background: #ff2d55;
+            border-radius: 50%;
+            animation: s-blink 1.5s infinite;
+        }
+        @keyframes s-blink {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        /* ENCABEZADO */
+        .sentinel-heading {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            color: #f0f0f5;
+            margin-bottom: 12px;
+        }
+        .sentinel-heading-accent {
+            background: linear-gradient(135deg, #ff2d55 0%, #ff6b00 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .sentinel-subheading {
+            color: #5a5a70;
+            font-size: 1rem;
+            max-width: 480px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+            font-weight: 400;
+        }
+
+        /* LAYOUT PRINCIPAL */
+        .sentinel-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        /* MÓDULOS — IZQUIERDA */
+        .sentinel-modules {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .s-module {
+            background: rgba(15,15,20,0.9);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 18px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .s-module:hover {
+            border-color: rgba(255,45,85,0.25);
+            background: rgba(20,20,28,0.95);
+            transform: translateX(6px);
+        }
+        .s-module-icon {
+            font-size: 1.5rem;
+            width: 44px; height: 44px;
+            background: rgba(255,45,85,0.08);
+            border: 1px solid rgba(255,45,85,0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .s-module-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f0f0f5;
+            letter-spacing: -0.01em;
+        }
+        .s-module-desc {
+            font-size: 0.78rem;
+            color: #5a5a70;
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+        .s-module-badge {
+            margin-left: auto;
+            font-size: 0.62rem;
+            padding: 3px 10px;
+            border-radius: 100px;
+            background: rgba(48,209,88,0.1);
+            color: #30d158;
+            border: 1px solid rgba(48,209,88,0.25);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* PANEL DERECHA */
+        .sentinel-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* MINI DASHBOARD */
+        .s-dashboard {
+            background: rgba(10,10,14,0.95);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+        }
+        .s-dash-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .s-dash-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .s-dash-dot:nth-child(1) { background: #ff5f57; }
+        .s-dash-dot:nth-child(2) { background: #febc2e; }
+        .s-dash-dot:nth-child(3) { background: #28c840; }
+        .s-dash-bar-label {
+            margin-left: 8px;
+            font-size: 0.7rem;
+            color: #3a3a4a;
+            flex: 1;
+        }
+
+        .s-stats-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .s-stat-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 12px;
+        }
+        .s-stat-label {
+            font-size: 0.62rem;
+            color: #3a3a4a;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+        .s-stat-val {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+        .s-stat-val.red { color: #ff2d55; }
+        .s-stat-val.orange { color: #ff6b00; }
+        .s-stat-val.green { color: #30d158; }
+        .s-stat-val.white { color: #f0f0f5; }
+        .s-stat-sub { font-size: 0.62rem; color: #30d158; margin-top: 2px; }
+
+        /* BARRA DE AMENAZAS */
+        .s-threat-section {
+            margin-top: 4px;
+        }
+        .s-threat-title { font-size: 0.65rem; color: #3a3a4a; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .s-threat-row {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+        }
+        .s-threat-label { font-size: 0.7rem; color: #5a5a70; width: 90px; flex-shrink: 0; }
+        .s-threat-bg {
+            flex: 1; height: 5px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 100px; overflow: hidden;
+        }
+        .s-threat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff2d55, #ff6b00);
+            border-radius: 100px;
+        }
+        .s-threat-count { font-size: 0.68rem; color: #3a3a4a; width: 28px; text-align: right; }
+
+        /* LOCKDOWN CARD */
+        .s-lockdown {
+            background: linear-gradient(135deg, rgba(255,45,85,0.07), rgba(255,107,0,0.03));
+            border: 1px solid rgba(255,45,85,0.2);
+            border-radius: 16px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .s-lockdown-icon { font-size: 1.8rem; }
+        .s-lockdown-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #f0f0f5;
+        }
+        .s-lockdown-sub { font-size: 0.72rem; color: #5a5a70; margin-top: 2px; }
+        .s-lockdown-badge {
+            margin-left: auto;
+            font-size: 0.6rem;
+            background: rgba(255,45,85,0.15);
+            border: 1px solid rgba(255,45,85,0.3);
+            color: #ff8099;
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-weight: 700;
+            flex-shrink: 0;
+            animation: s-blink 2s infinite;
+        }
+
+        /* STATS STRIP SENTINEL */
+        .sentinel-stats-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 48px;
+        }
+        .s-strip-item {
+            background: rgba(10,10,14,0.95);
+            padding: 20px 24px;
+            text-align: center;
+        }
+        .s-strip-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #f0f0f5;
+            letter-spacing: -0.03em;
+        }
+        .s-strip-label { font-size: 0.72rem; color: #3a3a4a; margin-top: 4px; }
+
+        /* CTA SENTINEL */
+        .sentinel-cta-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .sentinel-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ff2d55, #ff6b00);
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            transition: all 0.3s;
+            font-family: 'Syne', sans-serif;
+            border: none;
+            cursor: pointer;
+        }
+        .sentinel-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255,45,85,0.4);
+        }
+        .sentinel-btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #5a5a70;
+            text-decoration: none;
+            padding: 14px 24px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .sentinel-btn-ghost:hover {
+            border-color: rgba(255,255,255,0.2);
+            color: #f0f0f5;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .sentinel-layout { grid-template-columns: 1fr; }
+            .sentinel-stats-strip { grid-template-columns: repeat(2,1fr); }
+            .sentinel-inner { padding: 60px 20px 80px; }
+            .sentinel-heading { font-size: 2.4rem; }
+        }
+        @media (max-width: 480px) {
+            .sentinel-stats-strip { grid-template-columns: 1fr 1fr; }
+            .s-stats-row { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
 </head>
 <body>
 
@@ -49,6 +430,7 @@
                 <a href="#historia">Historia</a>
                 <a href="#comandos">Comandos</a>
                 <a href="#rpg-system">RPG</a>
+                <a href="#sentinel-section">🛡️ Sentinel</a>
                 <a href="documentacion.html" class="doc-link">
                     <i class="fas fa-book"></i> Documentación
                 </a>
@@ -191,7 +573,6 @@
             </div>
 
             <div class="luxury-grid">
-                <!-- Tarjeta de Juegos -->
                 <div class="luxury-card" data-category="games" data-aos="fade-up">
                     <div class="icon-circle">🎮</div>
                     <h3>Juegos Interactivos</h3>
@@ -204,7 +585,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta RPG / Rolplay -->
                 <div class="luxury-card" data-category="rpg" data-aos="fade-up" data-aos-delay="100">
                     <div class="icon-circle">⚔️</div>
                     <h3>Aventuras RPG</h3>
@@ -216,7 +596,6 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta Social y Economía -->
                 <div class="luxury-card" data-category="social" data-aos="fade-up" data-aos-delay="200">
                     <div class="icon-circle">💕</div>
                     <h3>Social & Economía</h3>
@@ -238,7 +617,7 @@
         </div>
     </section>
 
-    <!-- Sección de vista previa documentación -->
+    <!-- Sección documentación preview -->
     <section id="documentacion-preview" class="docs-preview-section">
         <div class="container">
             <div class="header-center" data-aos="fade-up">
@@ -306,6 +685,194 @@
             </div>
         </div>
     </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         🛡️ SECCIÓN LUMI SENTINEL — INTEGRADA
+    ════════════════════════════════════════════════════ -->
+    <div class="sentinel-transition-top"></div>
+
+    <section id="sentinel-section">
+        <div class="sentinel-bg-grid"></div>
+        <div class="sentinel-bg-glow"></div>
+
+        <div class="sentinel-inner">
+
+            <!-- ENCABEZADO -->
+            <div data-aos="fade-up" style="margin-bottom: 56px;">
+                <div class="sentinel-eyebrow">
+                    <div class="sentinel-eyebrow-dot"></div>
+                    Nuevo · Premium Exclusivo
+                </div>
+                <h2 class="sentinel-heading">
+                    Lumi <span class="sentinel-heading-accent">Sentinel</span><br>protege tu server.
+                </h2>
+                <p class="sentinel-subheading">
+                    El módulo de ciberseguridad premium para Discord. Cinco capas de protección, moderación autónoma y control total para administradores.
+                </p>
+            </div>
+
+            <!-- LAYOUT MÓDULOS + DASHBOARD -->
+            <div class="sentinel-layout" data-aos="fade-up" data-aos-delay="100">
+
+                <!-- MÓDULOS IZQUIERDA -->
+                <div class="sentinel-modules">
+                    <div class="s-module">
+                        <div class="s-module-icon">🛡️</div>
+                        <div>
+                            <div class="s-module-name">Anti-Raid</div>
+                            <div class="s-module-desc">Detecta joins masivos y activa lockdown automático al superar el umbral configurado.</div>
+                        </div>
+                        <div class="s-module-badge">ACTIVO</div>
+                    </div>
+                    <div class="s-module">
+                        <div class="s-module-icon">🎣</div>
+                        <div>
+                            <div class="s-module-name">Anti-Scam</div>
+                            <div class="s-module-desc">Bloquea phishing, typosquatting, homograph attacks y TLDs sospechosos en tiempo real.</div>
+                        </div>
+                        <div class="s-module-badge">ACTIVO</div>
+                    </div>
+                    <div class="s-module">
+                        <div class="s-module-icon">🔏</div>
+                        <div>
+                            <div class="s-module-name">Anti-Dox</div>
+                            <div class="s-module-desc">Protege DNI, emails, teléfonos e IPs. Modo suave o estricto configurable.</div>
+                        </div>
+                        <div class="s-module-badge">ACTIVO</div>
+                    </div>
+                    <div class="s-module">
+                        <div class="s-module-icon">⚡</div>
+                        <div>
+                            <div class="s-module-name">Anti-Spam</div>
+                            <div class="s-module-desc">Mute automático configurable. Límite de 10 mensajes/min por defecto.</div>
+                        </div>
+                        <div class="s-module-badge">ACTIVO</div>
+                    </div>
+                    <div class="s-module">
+                        <div class="s-module-icon">🎫</div>
+                        <div>
+                            <div class="s-module-name">Sistema Tickets</div>
+                            <div class="s-module-desc">Paneles custom, transcripts automáticos y auto-cierre por inactividad.</div>
+                        </div>
+                        <div class="s-module-badge">ACTIVO</div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="sentinel-cta-row">
+                        <a href="sentinel.html" class="sentinel-btn-primary">
+                            Ver Sentinel completo ✦
+                        </a>
+                        <a href="sentinel.html#precios" class="sentinel-btn-ghost">
+                            Ver precios →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD + LOCKDOWN DERECHA -->
+                <div class="sentinel-right">
+                    <!-- MINI DASHBOARD -->
+                    <div class="s-dashboard">
+                        <div class="s-dash-bar">
+                            <div class="s-dash-dot"></div>
+                            <div class="s-dash-dot"></div>
+                            <div class="s-dash-dot"></div>
+                            <div class="s-dash-bar-label">Sentinel Dashboard · En vivo</div>
+                            <div style="font-size:0.62rem; color:#ff8099; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <span style="width:6px;height:6px;background:#ff2d55;border-radius:50%;display:inline-block;animation:s-blink 1.5s infinite;"></span>
+                                24 amenazas hoy
+                            </div>
+                        </div>
+
+                        <div class="s-stats-row">
+                            <div class="s-stat-box">
+                                <div class="s-stat-label">Ataques bloq.</div>
+                                <div class="s-stat-val red">1,247</div>
+                                <div class="s-stat-sub">↑ 12% este mes</div>
+                            </div>
+                            <div class="s-stat-box">
+                                <div class="s-stat-label">Msgs eliminados</div>
+                                <div class="s-stat-val orange">394</div>
+                                <div class="s-stat-sub">↑ 8% esta semana</div>
+                            </div>
+                            <div class="s-stat-box">
+                                <div class="s-stat-label">Usuarios sanc.</div>
+                                <div class="s-stat-val white">89</div>
+                                <div class="s-stat-sub">↓ 3% este mes</div>
+                            </div>
+                            <div class="s-stat-box">
+                                <div class="s-stat-label">Uptime</div>
+                                <div class="s-stat-val green">99.9%</div>
+                                <div class="s-stat-sub">↔ sin cambios</div>
+                            </div>
+                        </div>
+
+                        <div class="s-threat-section">
+                            <div class="s-threat-title">Amenazas detectadas</div>
+                            <div class="s-threat-row">
+                                <div class="s-threat-label">Phishing</div>
+                                <div class="s-threat-bg"><div class="s-threat-fill" style="width:85%"></div></div>
+                                <div class="s-threat-count">423</div>
+                            </div>
+                            <div class="s-threat-row">
+                                <div class="s-threat-label">Anti-Raid</div>
+                                <div class="s-threat-bg"><div class="s-threat-fill" style="width:62%"></div></div>
+                                <div class="s-threat-count">310</div>
+                            </div>
+                            <div class="s-threat-row">
+                                <div class="s-threat-label">Spam</div>
+                                <div class="s-threat-bg"><div class="s-threat-fill" style="width:47%"></div></div>
+                                <div class="s-threat-count">235</div>
+                            </div>
+                            <div class="s-threat-row">
+                                <div class="s-threat-label">Dox</div>
+                                <div class="s-threat-bg"><div class="s-threat-fill" style="width:28%"></div></div>
+                                <div class="s-threat-count">140</div>
+                            </div>
+                            <div class="s-threat-row">
+                                <div class="s-threat-label">Homograph</div>
+                                <div class="s-threat-bg"><div class="s-threat-fill" style="width:18%"></div></div>
+                                <div class="s-threat-count">89</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LOCKDOWN CARD -->
+                    <div class="s-lockdown">
+                        <div class="s-lockdown-icon">🔒</div>
+                        <div>
+                            <div class="s-lockdown-title">Modo Seguro · Lockdown</div>
+                            <div class="s-lockdown-sub">Bloqueo total del servidor · 5 a 60 min · Manual o automático</div>
+                        </div>
+                        <div class="s-lockdown-badge">PREMIUM</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATS STRIP -->
+            <div class="sentinel-stats-strip" data-aos="fade-up" data-aos-delay="200">
+                <div class="s-strip-item">
+                    <div class="s-strip-num">6+</div>
+                    <div class="s-strip-label">Tipos de ataque detectados</div>
+                </div>
+                <div class="s-strip-item">
+                    <div class="s-strip-num">5</div>
+                    <div class="s-strip-label">Módulos de protección</div>
+                </div>
+                <div class="s-strip-item">
+                    <div class="s-strip-num">15min</div>
+                    <div class="s-strip-label">Lockdown automático</div>
+                </div>
+                <div class="s-strip-item">
+                    <div class="s-strip-num">99.9%</div>
+                    <div class="s-strip-label">Tiempo activo garantizado</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="sentinel-transition-bottom"></div>
+    <!-- ═══════════════════════════════════════════════════ -->
 
     <!-- Sección Premium -->
     <section id="premium" class="premium-section">
@@ -428,6 +995,7 @@
                         <li><a href="#historia">Historia</a></li>
                         <li><a href="#comandos">Comandos</a></li>
                         <li><a href="#rpg-system">Sistema RPG</a></li>
+                        <li><a href="#sentinel-section">🛡️ Sentinel</a></li>
                         <li><a href="documentacion.html">Documentación</a></li>
                         <li><a href="#premium">Premium</a></li>
                     </ul>
@@ -437,6 +1005,7 @@
                     <ul>
                         <li><a href="https://discord.gg/P59CwwQPgS" target="_blank" rel="noopener noreferrer">Servidor Soporte</a></li>
                         <li><a href="documentacion.html#rpg-section">Guía RPG Completa</a></li>
+                        <li><a href="sentinel.html">Lumi Sentinel</a></li>
                         <li><a href="documentacion.html#faq">Preguntas Frecuentes</a></li>
                         <li><a href="#">Términos de Servicio</a></li>
                         <li><a href="#">Política de Privacidad</a></li>
@@ -448,6 +1017,7 @@
                         <li><code>/play</code> - Música</li>
                         <li><code>/rolplay</code> - Aventura RPG</li>
                         <li><code>/economy</code> - Tu dinero</li>
+                        <li><code>/automod</code> - Sentinel</li>
                         <li><code>/help</code> - Ayuda</li>
                     </ul>
                 </div>
@@ -456,13 +1026,14 @@
                 <span>© 2025 LumiBot Project. Todos los derechos reservados. Versión 1.2</span>
                 <div class="legal-right">
                     <a href="https://discord.gg/P59CwwQPgS" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
+                    <a href="sentinel.html">🛡️ Sentinel</a>
                     <a href="#"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Modal para galería -->
+    <!-- Modal galería -->
     <div class="modal" id="galleryModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -482,15 +1053,13 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script-improvet.js"></script>
     <script>
-        // Inicializar AOS
         AOS.init({ 
             duration: 1000, 
             once: true,
             offset: 100,
-            disable: window.innerWidth < 768 ? true : false // Desactivar en móvil para mejor rendimiento
+            disable: window.innerWidth < 768 ? true : false
         });
 
-        // Función para abrir galería
         function openGallery() {
             const modal = document.getElementById('galleryModal');
             if (modal) {
@@ -499,32 +1068,21 @@
             }
         }
 
-        // Cerrar modal
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('galleryModal');
             const closeBtn = document.querySelector('.close-modal');
-            
             if (closeBtn) {
                 closeBtn.addEventListener('click', function() {
-                    if (modal) {
-                        modal.style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                    }
+                    if (modal) { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
                 });
             }
-            
-            // Cerrar modal al hacer clic fuera
             if (modal) {
                 modal.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                    }
+                    if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
                 });
             }
         });
 
-        // Actualizar stats con datos reales del bot (puedes hacer fetch a tu API)
         document.addEventListener('DOMContentLoaded', async function() {
             try {
                 document.getElementById('serversCount').textContent = '+90';
